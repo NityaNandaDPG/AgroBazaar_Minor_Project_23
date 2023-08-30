@@ -1,0 +1,13 @@
+{
+    "name": "mern-project",
+    "version": "1.0.0",
+    "description": "MERN stack project",
+    "scripts": {
+        "start": "npm-run-all --parallel start:server start:client",
+        "start:server": "npm run start --prefix server",
+        "start:client": "npm start --prefix client"
+    },
+    "dependencies": {
+
+    }
+}
