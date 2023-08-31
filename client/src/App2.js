@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import Header from './components/Header';
 import './App.css';
+
 import MarketPrice from './components/MarketPrice';
 import Footer from './components/Footer';
 
