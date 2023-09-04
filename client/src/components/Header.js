@@ -4,6 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BiChat } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import logo from './resources/logo.jpg';
+import { Outlet,Link } from 'react-router-dom';
 
 function Header(){
 
@@ -21,7 +22,8 @@ function Header(){
             <div className='menu'>
                 <a className='menu-button' href='#'>Account<IoMdArrowDropdown/></a>
                 <div className='menu-content'>
-                    <a href="#">Login</a>
+                    {/* <a to="" href="#">Login</a> */}
+                    <Link to="/login">Login</Link>
                     <a href="#">My Wishlist</a>
                     <a href="#">My Order</a>
                     
