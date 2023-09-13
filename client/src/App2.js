@@ -1,5 +1,4 @@
-
-import { BrowserRouter as Router,Route,Routes} from 'react-router-dom';
+import {createBrowserRouter,createRoutesFromElements,Route,RouterProvider} from "react-router-dom";
 import './App.css';
 
 import Login from './components/Login';
@@ -10,17 +9,18 @@ import Footer from './components/Footer';
 import Error from './components/Error';
 
 function App2() {
-  return (
-    <div>
-        <Routes>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
             <Route exact path='/' element={<Home/>}>
               <Route index element={<MarketPrice/>}/>
               <Route path="login" element={<Login/>}/>
               <Route path="*" element={<Error/>}/>
             </Route>
-        </Routes>
-    </div>
+    )
   );
+  return(
+    <RouterProvider router={router} />
+    
+  )
 }
-
 export default App2;
