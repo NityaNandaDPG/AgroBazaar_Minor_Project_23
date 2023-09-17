@@ -1,10 +1,10 @@
 const express=require('express')
 const bodyParser=require('body-parser')
-const mongoose=require('mongoose')
-const app=express()
-const jwt=jwt=require('jsonwebtoken')
+// const mongoose=require('mongoose')
+const app=express.Router()
+const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-const User=require('../../models/user')
+const User=require('../../models/User.js')
 
 // const urlencodedParser=bodyParser.urlencoded({extended:false})
 // app.use(bodyParser.json(),urlencodedParser)
@@ -57,7 +57,7 @@ app.post("/login",(req,res)=>{
                             message:"Success",
                             token:"Bearer "+token
                         })
-                    }
+                    } 
                 )
             }
             else{
@@ -68,3 +68,5 @@ app.post("/login",(req,res)=>{
         })
     })
 })
+
+module.exports = app;

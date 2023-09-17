@@ -14,3 +14,9 @@ const connectDB=async()=>{
     }
 };
 module.exports=connectDB;
+
+
+// {
+//     "mongoURI":
+//       "mongodb+srv://nnadkbdhupguri:E9bpWfrQT6bbO6Sv@nityananda.lqszq1v.mongodb.net/?retryWrites=true&w=majority"
+// }
