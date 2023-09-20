@@ -7,17 +7,19 @@ import Login from './components/Login';
 import  SignUp from './components/SignUp';
 import Home from './components/Home';
 import MarketPrice from './components/MarketPrice';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Error from './components/Error';
+import ProductList from './components/ProductList';
+import ProductForm from './components/ProductForm';
 
 function App2() {
   const router = createBrowserRouter(
     createRoutesFromElements(
             <Route exact path='/' element={<Home/>}>
-              <Route index element={<MarketPrice/>}/>
+              {/* <Route index element={<MarketPrice/>}/> */}
+              <Route index element={<ProductList/>}/>
               <Route path="login" element={<Login/>}/>
               <Route path="signup" element={<SignUp/>}/>
+              <Route path="form" element={<ProductForm/>}/>
               <Route path="*" element={<Error/>}/>
             </Route>
     )

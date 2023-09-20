@@ -45,7 +45,7 @@ import {
   
     const submitForm = async (e) => {
       e.preventDefault();
-      const response = await fetch("http://localhost:8080/demo", {
+      const response = await fetch("http://localhost:8082/user/register", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -157,7 +157,7 @@ import {
                       </Button>
   
                       <p style={{ marginTop: "2%" }}>
-                        <a href="/Login">Have an account..Log In?</a>
+                        <a href="/login">Have an account..Log In?</a>
                       </p>
                     </Container>
                   </Form>

@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import App2 from './App2';
+// import App from './App';
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ root.render(
     <Provider store={store}>
       <App2 />
     </Provider>
+    {/* <App /> */}
   </React.StrictMode>
 );
 reportWebVitals();

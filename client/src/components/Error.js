@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 export default function Error(){
     return(
-        <h1>Page Not Found</h1>
+        <h1>Page Not Found/Not Available</h1>
     );
 
 }
