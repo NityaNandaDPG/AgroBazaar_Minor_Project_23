@@ -9,13 +9,14 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import App2 from './App2';
+import { store } from "./redux/index.js";
 // import App from './App';
 
-const store = configureStore({
-  reducer: {
-    counter: counterReducer, // Add your slice's reducer here
-  },
-});
+// const store = configureStore({
+//   reducer: {
+//     counter: counterReducer, // Add your slice's reducer here
+//   },
+// });
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

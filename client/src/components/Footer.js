@@ -39,7 +39,7 @@ function Footer(){
                 </div>
             </div>
             <div className='footer2'>
-                <h6>&copy;2023 AgroBazaar</h6>
+                <h6>&copy;2023 VegMart</h6>
 
             </div>
         </footer>

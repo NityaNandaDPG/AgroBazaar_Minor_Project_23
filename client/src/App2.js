@@ -10,6 +10,7 @@ import MarketPrice from './components/MarketPrice';
 import Error from './components/Error';
 import ProductList from './components/ProductList';
 import ProductForm from './components/ProductForm';
+import Basket from './components/Basket';
 
 function App2() {
   const router = createBrowserRouter(
@@ -20,6 +21,7 @@ function App2() {
               <Route path="login" element={<Login/>}/>
               <Route path="signup" element={<SignUp/>}/>
               <Route path="form" element={<ProductForm/>}/>
+              <Route path="basket" element={<Basket/>}/>
               <Route path="*" element={<Error/>}/>
             </Route>
     )
