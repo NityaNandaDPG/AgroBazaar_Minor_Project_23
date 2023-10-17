@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  name: "",
+  isAuthenticated: false,
   email: "",
-  Type: "",
-  image: "",
+  type: "",
+  firstname: "",
+  lastname:"",
+  avatar: "",
 };
 
 export const userSlice = createSlice({
@@ -12,15 +14,49 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginRedux: (state, action) => {
-      console.log(action.payload.data); // Correctly accessing action.payload.data
-      state.name = action.payload.data.name; // Accessing properties via action.payload.data
-      state.email = action.payload.data.email;
-      state.Type = action.payload.data.Type;
-      state.image = action.payload.data.image;
+      console.log(action.payload.data);
+      state.isAuthenticated = true;
+      state.email=action.payload.data.email;
+      state.type=action.payload.data.type;
+      state.firstname=action.payload.data.firstname;
+      state.lastname=action.payload.data.lastname;
+      state.avatar=action.payload.data.avatar;
     },
-  },
+    logoutRedux: (state)=>{
+      state.isAuthenticated = false;
+    }
+  }
 });
 
-export const { loginRedux } = userSlice.actions;
-
+export const { loginRedux,logoutRedux } = userSlice.actions;
 export default userSlice.reducer;
+
+// import  {createSlice} from '@reduxjs/toolkit';
+
+// const initialState = {
+
+//     state: {
+//         isFetching: false,
+//     },
+//     user:{
+//   name:"collins",
+//   isAuthenticated:true
+// },
+// }
+
+// const userSlice = createSlice({
+//   name: "user",
+//   initialState,
+//   reducers: {
+//     setIsFetching : (state) => {
+//         state.state.isFetching = true;
+//   }, 
+//   }  
+// });
+
+// export const {
+//       setIsFetching,
+//     } = userSlice.actions;
+
+
+// export default userSlice.reducer;

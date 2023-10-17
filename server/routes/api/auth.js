@@ -13,20 +13,38 @@ const JWT_SECRET = "jbdfbhbffashjbbf*&kmagra[]{vsdfas}knmasja";
 
 auth.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, Type, image } = req.body;
+    const { 
+      username,
+      firstname,
+      lastname,
+      email,
+      password,
+      gender,
+      dob,
+      avatar,
+      type,
+      address: {street, city, state, country, pin},
+      products} = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.json({ error: "User-Exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password,10);
     const newUser = new User({
-      name,
+      username,
+      firstname,
+      lastname,
       email,
-      password: hashedPassword,
-      Type,
-      image,
+      password,
+      // hashedPassword,
+      gender,
+      dob,
+      avatar,
+      type,
+      address: {street, city, state, country, pin},
+      products
     });
 
     await newUser.save();
@@ -39,26 +57,30 @@ auth.post("/signup", async (req, res) => {
   }
 });
 
-auth.post("/login", async (req, res) => {
+auth.post("/login", async (req,res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password }=req.body;
 
-    const user = await User.findOne({ email });
+    const user=await User.findOne({email});
     if (!user) {
       return res.json({ error: "User does not exist" });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (passwordMatch) {
-      const token = jwt.sign({}, JWT_SECRET);
-      const dataSend = {
-        name: user.name,
+    if (passwordMatch)
+    // if (password==user.password)
+    {
+      const token=jwt.sign({}, JWT_SECRET);
+      const dataSend={
+        firstname: user.firstname,
+        lastname: user.lastname,
         email: user.email,
-        Type: user.Type,
-        image: user.image,
+        type: user.type,
+        avatar: user.avatar,
       };
       return res.json({ status: "ok", data: dataSend, dt: token });
-    } else {
+    }
+    else {
       return res.json({ status: "error", error: "Invalid password" });
     }
   } catch (error) {
@@ -67,7 +89,7 @@ auth.post("/login", async (req, res) => {
   }
 });
 
-auth.get("/getUser", async (req, res) => {
+auth.get("/getUser",  async (req, res) => {
   // Assuming you have a way to identify the user from the token (e.g., user ID)
   const email = req.body; // Replace with your actual user ID retrieval logic
 

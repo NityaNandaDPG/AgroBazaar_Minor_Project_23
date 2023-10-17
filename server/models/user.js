@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  username: {
+    type: String,
+    required: true
+  },
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
     type: String,
     required: true
   },
@@ -13,15 +21,50 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Type: {
-    type:String,
+  gender: {
+    type: String,
+    enum: ['Male', 'Female','Others'],
     required: true
   },
-  Type: {
-    type:String,
+  dob: {
+    type: Date,
     required: true
-  }
-// }, {timestamps:true
+  },
+  avatar: {
+    fileName: String,
+    filePath: String
+  },
+  type: {
+    type:String,
+    enum: ['Consumer', 'Farmer','Supervisor'],
+    required: true
+  },
+  address: {
+    street: {
+      type: String,
+      required: false
+    },
+    city: {
+      type: String,
+      required: false
+    },
+    state: {
+      type: String,
+      required: false
+    },
+    country: {
+      type: String,
+      default: 'India',
+      required: false
+    },
+    pin: {
+      type: Number,
+      required: false
+    }
+  },
+  products:[
+
+  ]
 })
 
 const User = mongoose.model('User', UserSchema);
