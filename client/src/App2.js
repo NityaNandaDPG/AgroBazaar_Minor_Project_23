@@ -13,17 +13,6 @@ import { useSelector } from "react-redux"; // Import the useSelector hook
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App2() {
-  // const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  // const ProtectedRoute = ({ element, ...rest }) => {
-  //   return isAuthenticated ? (
-  //     <Route {...rest} element={element} />
-  //   ) : (
-  //     <Navigate to="/login" />
-  //   );
-  // };
-
-
-
 
   const router = createBrowserRouter(
     createRoutesFromElements(

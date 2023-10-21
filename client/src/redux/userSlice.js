@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isAuthenticated: false,
   email: "",
   type: "",
   firstname: "",
@@ -15,7 +14,6 @@ export const userSlice = createSlice({
   reducers: {
     loginRedux: (state, action) => {
       console.log(action.payload.data);
-      state.isAuthenticated = true;
       state.email=action.payload.data.email;
       state.type=action.payload.data.type;
       state.firstname=action.payload.data.firstname;
@@ -23,40 +21,14 @@ export const userSlice = createSlice({
       state.avatar=action.payload.data.avatar;
     },
     logoutRedux: (state)=>{
-      state.isAuthenticated = false;
+      state.email="";
+      state.type="";
+      state.firstname="";
+      state.lastname="";
+      state.avatar="";
     }
   }
 });
 
 export const { loginRedux,logoutRedux } = userSlice.actions;
 export default userSlice.reducer;
-
-// import  {createSlice} from '@reduxjs/toolkit';
-
-// const initialState = {
-
-//     state: {
-//         isFetching: false,
-//     },
-//     user:{
-//   name:"collins",
-//   isAuthenticated:true
-// },
-// }
-
-// const userSlice = createSlice({
-//   name: "user",
-//   initialState,
-//   reducers: {
-//     setIsFetching : (state) => {
-//         state.state.isFetching = true;
-//   }, 
-//   }  
-// });
-
-// export const {
-//       setIsFetching,
-//     } = userSlice.actions;
-
-
-// export default userSlice.reducer;

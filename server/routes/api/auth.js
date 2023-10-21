@@ -6,13 +6,11 @@ const jwt = require("jsonwebtoken");
 const User=require('../../models/User.js');
 
 const auth = express.Router();
-// server.use(cors());
 auth.use(bodyParser.json());
 
 const JWT_SECRET = "jbdfbhbffashjbbf*&kmagra[]{vsdfas}knmasja";
 
 auth.post("/signup", async (req, res) => {
-  try {
     const { 
       username,
       firstname,
@@ -26,19 +24,19 @@ auth.post("/signup", async (req, res) => {
       address: {street, city, state, country, pin},
       products} = req.body;
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.json({ error: "User-Exists" });
-    }
-
     const hashedPassword = await bcrypt.hash(password,10);
+    try{
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.json({ error: "User-Exists" });
+      }
+
     const newUser = new User({
       username,
       firstname,
       lastname,
       email,
-      password,
-      // hashedPassword,
+      password:hashedPassword,
       gender,
       dob,
       avatar,
@@ -51,6 +49,7 @@ auth.post("/signup", async (req, res) => {
     console.log("New user created:", newUser);
 
     return res.json({ status: "ok" });
+  
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ error: "Server error" });
@@ -58,33 +57,32 @@ auth.post("/signup", async (req, res) => {
 });
 
 auth.post("/login", async (req,res) => {
-  try {
     const { email, password }=req.body;
-
     const user=await User.findOne({email});
     if (!user) {
       return res.json({ error: "User does not exist" });
     }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (passwordMatch)
-    // if (password==user.password)
-    {
-      const token=jwt.sign({}, JWT_SECRET);
+    
+    try {
       const dataSend={
+        _id: user._id,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
         type: user.type,
         avatar: user.avatar,
       };
-      return res.json({ status: "ok", data: dataSend, dt: token });
-    }
-    else {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if(passwordMatch){
+        const token=jwt.sign({}, JWT_SECRET);
+        return res.json({ status: "ok", data: dataSend, dt: token });
+      }
+    else{
       return res.json({ status: "error", error: "Invalid password" });
     }
-  } catch (error) {
-    console.error("Login error:", error);
+  }
+  catch(error){
     return res.status(500).json({ error: "Server error" });
   }
 });

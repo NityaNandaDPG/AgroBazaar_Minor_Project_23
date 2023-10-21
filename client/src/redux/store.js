@@ -1,44 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import userSliceReducer from "./userSlice";
-// export const store = configureStore({
-//   reducer: {
-//     user: userSliceReducer,
-//   },
-// });
+import { combineReducers } from "redux";
+import userSliceReducer from "./userSlice";
+import productSliceReducer from "./productSlice";
+import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
+import thunk from 'redux-thunk';
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-// import {configureStore} from '@reduxjs/toolkit';
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-  } from "redux-persist";
-  import storage from "redux-persist/lib/storage";
+const rootReducer = combineReducers({ 
+  user: userSliceReducer,
+  product: productSliceReducer,
+})
 
- import userReducer from "./userSlice";
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-  const persistConfig = {
-    key: "root",
-    version: 1,
-    storage,
-  };
-
-  const rootReducer = persistReducer(persistConfig, userReducer);
-
-const store = configureStore({
-  reducer: { user: rootReducer},
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk]
 });
-const persistor = persistStore(store);
-// export default store;
-export {store, persistor};
+
+export const persistor = persistStore(store);

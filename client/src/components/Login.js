@@ -1,30 +1,28 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, redirect, useHistory } from "react-router-dom";
 import { loginRedux,logoutRedux } from "../redux/userSlice";
 
+
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const store = useSelector((state) => state);
+  const store = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      alert('Please enter both email and password.');
-      return;
-    }
-
-    try{
 
     const response = await fetch("http://localhost:8082/auth/login", {
       method: "POST",
       crossDomain: true,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         email,
@@ -34,45 +32,20 @@ const Login = () => {
 
     const res = await response.json();
     if(res.status==="ok"){
-      const token = res.token;
       dispatch(loginRedux(res));
-      console.log(res);
-      localStorage.setItem("authToken", token);
-      // const authToken = localStorage.getItem("authToken"); 
-      console.log(authToken);
+      console.log(store);
       alert("Login Successful");
-      // if(authToken){
-        // console.log(store);
-      // }
+
+      navigate("/");
+      
     }
-    else if (res.status=="error"){
+    else if (res.status==="error"){
       alert("Login Unsuccessful, Enter Valid Details");
     }
     else {
       alert('An unexpected error occurred during login.');
     }
-  }
-  catch (error) {
-    alert('An error occurred during the login process.');
-    console.error(error);
-  }
-    // else {
-    //   console.error("Authentication failed");
-    // }
   };
-
-    
-  //   if (res.status=="ok") {
-  //     alert("Login Successful");
-  //     window.localStorage.setItem("token", true);
-  //     dispatch(loginRedux(res));
-  //     console.log(store);
-  //   }
-    
-  //   else if (res.status == "error") {
-  //     alert("Login Unsuccessful, Enter Valid Details");
-  //   }
-  
 
   const handleLogout = () => {
     window.localStorage.removeItem("token");
