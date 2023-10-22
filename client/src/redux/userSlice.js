@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  _id:"",
+  isAuthenticated:false,
   email: "",
   type: "",
   firstname: "",
@@ -14,11 +16,13 @@ export const userSlice = createSlice({
   reducers: {
     loginRedux: (state, action) => {
       console.log(action.payload.data);
+      state._id=action.payload.data._id;
       state.email=action.payload.data.email;
       state.type=action.payload.data.type;
       state.firstname=action.payload.data.firstname;
       state.lastname=action.payload.data.lastname;
       state.avatar=action.payload.data.avatar;
+      state.isAuthenticated=true;
     },
     logoutRedux: (state)=>{
       state.email="";
@@ -26,6 +30,7 @@ export const userSlice = createSlice({
       state.firstname="";
       state.lastname="";
       state.avatar="";
+      state.isAuthenticated=false;
     }
   }
 });

@@ -1,5 +1,3 @@
-import {Container,Form,Card,CardBody,CardHeader,FormGroup,Input,Label,Button,Row,Col,} from "reactstrap";
-import { imgtobase } from "../utility/imgtobase";
 import { useEffect, useState } from "react";
 import { useNavigate, redirect, useHistory } from "react-router-dom";
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
@@ -31,7 +29,7 @@ const Signup = () => {
   });
   const [users, setusers] = useState([]);
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
 
   const statesOfIndia = [
@@ -90,10 +88,7 @@ const Signup = () => {
       password: "",
       gender: "",
       dob: "",
-      avatar: {
-        fileName: "",
-        filePath: ""
-      },
+      avatar: "",
       type: "",
       address: {
         street: "",
@@ -107,7 +102,7 @@ const Signup = () => {
   };
   
 
-  const handleFileChange = (event,property) => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
 
     if (file) {
@@ -115,7 +110,7 @@ const Signup = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const base64String = e.target.result;
-        setData({ ...data, image: base64String });
+        setData({ ...data, avatar: base64String });
       };
       reader.readAsDataURL(file);
     }
@@ -206,7 +201,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="col-span-full">
+            {/* <div className="col-span-full">
               <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
                 Photo
               </label>
@@ -219,11 +214,11 @@ const Signup = () => {
                   Change
                 </button>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-span-full">
               <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Cover photo
+                Avatar
               </label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
@@ -234,7 +229,14 @@ const Signup = () => {
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
-                      <input id="avatar" name="avatar" type="file" accept="image/*"  onChange={(e) => handleFileChange(e, "avatar")} className="sr-only" />
+                      <input id="avatar"
+                        name="avatar" 
+                        type="file" 
+                        accept="image/*"  
+                        onChange={(e)=>handleFileChange(e)}
+                        value={data.avatar}
+                         
+                        className="sr-only" />
                     </label>
                     <p className="pl-1">or drag and drop</p>
                   </div>

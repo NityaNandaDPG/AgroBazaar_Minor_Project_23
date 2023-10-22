@@ -104,14 +104,6 @@ auth.get("/getUser",  async (req, res) => {
   }
 });
 
-auth.get("/demo", async (req, res) => {
-  try {
-    const docs = await User.find({});
-    res.json(docs);
-  } catch (error) {
-    console.error("Get all users error:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
+
 
 module.exports=auth;

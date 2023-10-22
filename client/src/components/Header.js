@@ -24,6 +24,7 @@ function Header(){
                 <div className='menu-content'>
                     {/* <a to="" href="#">Login</a> */}
                     <Link to="/login">Login</Link>
+                    <Link to="/profile">My Profile</Link>
                     <a href="#">My Wishlist</a>
                     <a href="#">My Order</a>
                     
