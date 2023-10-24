@@ -31,8 +31,8 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   avatar: {
-    fileName: String,
-    filePath: String
+    type: String,
+    required: false
   },
   type: {
     type:String,

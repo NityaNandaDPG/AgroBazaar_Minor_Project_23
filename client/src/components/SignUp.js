@@ -100,7 +100,6 @@ const Signup = () => {
       products: []
     });
   };
-  
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -147,7 +146,6 @@ const Signup = () => {
     alert("An error occurred during signup. Please try again later.");
   }
   };
-
 
   return (
     <form onSubmit={submitForm}>
@@ -463,9 +461,6 @@ const Signup = () => {
         </button>
       </div>
     </form>
-  )
-
-// }
- 
+  ) 
 };
 export default Signup;
