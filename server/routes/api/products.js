@@ -1,5 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const User=require('../../models/User.js');
+
+router.post("/new/:id", async (req, res) => {
+  try{
+    const {product}=req.body;
+    console.log(product);
+    const existingUser=await User.findById(req.params.id);
+
+    if (!existingUser) {
+      return res.status(404).json({ error: "You have to log in first!"});
+    }
+    existingUser.products.push(product);
+    await existingUser.save();
+    res.status(200).json({ status: "ok", data: existingUser });
+  }
+  catch (error){
+    console.error("Error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 
 // Load Book model
 const Product=require('../../models/Product.js');
@@ -57,5 +78,7 @@ router.delete('/:id', (req, res) => {
     .then(book => res.json({ mgs: 'Vegetable entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such a Vegetable' }));
 });
+
+
 
 module.exports = router;

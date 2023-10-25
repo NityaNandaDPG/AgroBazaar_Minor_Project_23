@@ -10,8 +10,13 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const store = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const user=useSelector((state) => state.user);
+  const dispatch=useDispatch();
+  if(user.isAuthenticated){
+    console.log("You are already logged in");
+    navigate("/");
+
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +38,7 @@ const Login = () => {
     const res = await response.json();
     if(res.status==="ok"){
       dispatch(loginRedux(res));
-      console.log(store);
+      console.log(user);
       alert("Login Successful");
 
       navigate("/");

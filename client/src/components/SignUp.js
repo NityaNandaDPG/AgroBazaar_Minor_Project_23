@@ -135,7 +135,7 @@ const Signup = () => {
     const sdata = await response.json();
     if (sdata.status === "ok") {
       alert("Sign Up Successful. Kindly Login");
-
+      resetData();
       navigate("/login");
     }
     else {

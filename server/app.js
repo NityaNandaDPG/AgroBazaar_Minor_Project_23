@@ -15,7 +15,7 @@ app.get('/',(req,res)=>res.send('Hello World!'));
 
 app.use('/admin', admin);
 app.use('/auth', auth);
-app.use('/api/vegs', products);
+app.use('/products', products);
 
 
 const port=process.env.PORT || 8082;

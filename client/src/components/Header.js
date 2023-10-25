@@ -11,7 +11,7 @@ function Header(){
     return(
         
         <header className="header">
-            <img className="logo" src={logo} alt=''/>
+            <a href='/'><img className="logo" src={logo} alt=''/></a>
             <a href='#'>Today's Market</a>
             <a href='#'>Vegetables</a>
             <a href='#'>Grocery</a>
