@@ -3,16 +3,13 @@ import { Container, Card, CardBody, CardHeader, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import { Navigate, useNavigate, Route } from "react-router-dom";
-// import Update from "./Update";
 
 const MyProfile = () => {
-  const userData = useSelector((state) => state.user);
-  console.log("id is");
+  const userData=useSelector((state) => state.user);
   console.log(userData._id);
-
-  const isLoggedIn = window.localStorage.getItem("token");
-  const dispatch = useDispatch();
-  const handleLogout = () => {
+  const isLoggedIn=window.localStorage.getItem("token");
+  const dispatch=useDispatch();
+  const handleLogout=()=>{
     dispatch(logoutRedux());
     alert("Logout Out Successfull");
     window.localStorage.setItem("token", false);
@@ -46,10 +43,6 @@ const MyProfile = () => {
                 <p>Name: {userData.firstname} {userData.lastname}</p>
                 <p>Email: {userData.email}</p>
                 <p>Address: {userData.address}</p>
-                {/* <p>City: {userData.City}</p> */}
-                {/* <p>State: {userData.State}</p> */}
-                {/* <p>Pin: {userData.Pin}</p> */}
-                {/* Add other user data fields here */}
               </div>
             </>
           )}

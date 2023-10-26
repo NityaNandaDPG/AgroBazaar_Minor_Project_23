@@ -10,7 +10,7 @@ function ProductList() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8082/api/vegs')
+      .get('http://localhost:8082/products/')
       .then((res) => {
         setVegs(res.data);
       })

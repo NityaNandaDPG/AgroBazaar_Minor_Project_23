@@ -8,8 +8,9 @@ const NewProduct1=()=>{
     const id = useSelector((state) => state.user._id);
     const navigate = useNavigate();
     const [data, setData] = useState({
+        id:id,
         name: "",
-        category: "",
+        category: "Fruit",
         image: "",
         price: "",
         description: "",
@@ -21,7 +22,7 @@ const NewProduct1=()=>{
     });
     const [users, setusers] = useState([]);
     useEffect(() => {
-        // console.log(data);
+        console.log(data);
     }, [data]);
 
     const handleChange = (event, property) => {
@@ -46,8 +47,8 @@ const NewProduct1=()=>{
     const submitForm = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`http://localhost:8082/products/new/${id}`, {
-            method: "POST",
+            const response = await fetch('http://localhost:8082/products/new', {
+            method: "PUT",
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
@@ -65,11 +66,12 @@ const NewProduct1=()=>{
             }
             else {
                 alert(sdata.err || "An error occurred during Posting.");
+                console.log(sdata);
             }
         }
         catch (error) {
             console.error("Error:", error);
-            alert("An error occurred during signup. Please try again later.");
+            alert("An error occurred during post. Please try again later.");
         }
     };
 
@@ -119,7 +121,7 @@ const NewProduct1=()=>{
                                         autoComplete="description"
                                         onChange={(e) => handleChange(e, "description")}
                                         className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                        placeholder="Enter your new password"
+                                        placeholder="Enter description"
                                     />
                                 </div>
                             </div>
@@ -140,7 +142,7 @@ const NewProduct1=()=>{
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                     >
                                         <option value="Fruit">Fruit</option>
-                                        <option value="Vegitable"></option>
+                                        <option value="Vegetable">Vegetable</option>
                                 </select>
                             </div>
                         </div>
@@ -153,6 +155,7 @@ const NewProduct1=()=>{
                                     <input
                                     type="number"
                                     name="price"
+                                    required
                                     id="price"
                                     autoComplete="off"
                                     onChange={(e)=>handleChange(e,"price")}
