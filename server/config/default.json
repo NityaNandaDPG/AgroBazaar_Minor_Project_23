@@ -1,4 +1,5 @@
 {
   "mongoURI":
-    "mongodb://0.0.0.0:27017/mini_project"
+
+    "mongodb+srv://nnadkbdhupguri:QwEja7K8aF9vh1KE@cluster0.6lq8ouj.mongodb.net/?retryWrites=true&w=majority"
 }
