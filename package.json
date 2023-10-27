@@ -2,7 +2,7 @@
     "name": "vegmart-root",
     "version": "1.0.0",
     "description": "MERN stack project",
-    "license": "MIT" ,
+    "license": "MIT",
     "author": "K-N-T",
     "scripts": {
         "start": "npm-run-all --parallel start:server start:client",
