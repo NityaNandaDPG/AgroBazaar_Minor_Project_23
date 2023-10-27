@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import './Header.css';
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch,AiOutlineShoppingCart,AiFillHome } from "react-icons/ai";
 import { BiChat } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import logo from './resources/logo.jpg';
@@ -11,7 +11,8 @@ function Header(){
     return(
         
         <header className="header">
-            <a href='/'><img className="logo" src={logo} alt=''/></a>
+            <img className="logo" src={logo} alt=''/>
+            <a href='/'><AiFillHome/></a>
             <a href='#'>Today's Market</a>
             <a href='#'>Vegetables</a>
             <a href='#'>Grocery</a>
@@ -31,7 +32,8 @@ function Header(){
                 </div>
             </div>
             <a href='#'>Wishlist</a>
-            <a href='#'>Bag</a>
+            {/* <a href=''>Bag</a> */}
+            <Link to="/basket"><AiOutlineShoppingCart/></Link>
             <a href='#'><BiChat/></a>
         </header>
     );

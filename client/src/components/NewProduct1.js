@@ -10,6 +10,7 @@ const NewProduct1=()=>{
     // const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({
+        id:"",
         name: "",
         category: "Fruit",
         image: "",
@@ -32,6 +33,7 @@ const NewProduct1=()=>{
 
     const resetData = () => {
         setData({
+            id:"",
             name: "",
             category: "",
             image: "",
