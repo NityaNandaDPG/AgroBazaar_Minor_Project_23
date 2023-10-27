@@ -3,12 +3,36 @@ import { Container, Card, CardBody, CardHeader, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import { Navigate, useNavigate, Route } from "react-router-dom";
+import axios from 'axios';
+import ProductCard from './ProductCard';
 
 const MyProfile = () => {
   const userData=useSelector((state) => state.user);
-  console.log(userData._id);
-  const isLoggedIn=window.localStorage.getItem("token");
+  const id= useSelector((state) => state.user._id);
+  const [vegs, setVegs] = useState([]);
+  // const isLoggedIn=window.localStorage.getItem("token");
   const dispatch=useDispatch();
+  try{
+    axios
+    .get(`http://localhost:8082/products/${id}`)
+    .then((res) => {
+      setVegs(res.data);
+    })
+    .catch((err) => {
+      console.log('Error from Server');
+    });
+
+
+  }
+  catch(error){
+    console.log('Error from Server');
+  }
+
+  const productList =
+  vegs.length === 0
+    ? 'There is no product record!'
+    : vegs.map((item, k) => <ProductCard product={item} key={k}/>);
+
   const handleLogout=()=>{
     dispatch(logoutRedux());
     alert("Logout Out Successfull");
@@ -73,6 +97,31 @@ const MyProfile = () => {
                 <Button onClick={() => navigate("/form")} color="dark">
                   Post A Product
                 </Button>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <div>
+            {userData.isAuthenticated? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <h3>
+                My Products
+                </h3>
+                <div className='grid-container'>
+                  {productList}
+                </div>
+                
               </div>
             ) : (
               ""

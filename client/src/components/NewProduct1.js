@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate, redirect, useHistory } from "react-router-dom";
+import { useNavigate, redirect, useHistory,useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { BsCloudUpload } from "react-icons/bs";
 import { imgtobase } from "../utility/imgtobase";
+import axios from 'axios';
 
 const NewProduct1=()=>{
-    const id = useSelector((state) => state.user._id);
+    const id= useSelector((state) => state.user._id);
+    // const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({
-        id:id,
         name: "",
         category: "Fruit",
         image: "",
@@ -47,18 +48,20 @@ const NewProduct1=()=>{
     const submitForm = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch('http://localhost:8082/products/new', {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
+            const randomPartOfId = Math.floor(Math.random() * 10000);
+            const productID = `${data.category}-${randomPartOfId}`;
+            data.id = productID;
+            const response = await axios.put(`http://localhost:8082/products/new/${id}`, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
+            console.log(response);
 
-            if (!response.ok) {
+            if (response.status !== 200) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const sdata = await response.json();
+            const sdata = response.data;
             if (sdata.status === "ok") {
                 alert("Post Successful");
                 resetData();

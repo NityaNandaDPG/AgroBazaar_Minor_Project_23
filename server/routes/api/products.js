@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const User=require('../../models/User.js');
 
-router.put('/new', async (req,res) => {
+router.put('/new/:id', async (req,res) => {
   const newProduct=req.body;
   try{  
     const existingUser=await User.findOneAndUpdate(
-      { _id:req.body.id },
+      { _id:req.params.id },
       { $push: { products: { $each: [newProduct] }}} 
     );
 
@@ -21,13 +21,9 @@ router.put('/new', async (req,res) => {
   }
 });
 
-
 router.get('/',async (req, res) => {
   try {
-    // Use Mongoose to fetch all users
     const users = await User.find({}, 'products');
-
-    // Extract and send the products as a JSON response
     const allProducts = users.reduce((acc, user) => acc.concat(user.products), []);
     res.json(allProducts);
   } catch (error) {
@@ -35,10 +31,22 @@ router.get('/',async (req, res) => {
   }
 });
 
-router.get('/:id',(req, res) => {
-  Product.findById(req.params.id)
-    .then(product=>res.json(product))
-    .catch(err=>res.status(404).json({ nobookfound: 'No Vegetables found' }));
+router.get('/:id',async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userProducts = user.products;
+    return res.json(userProducts);
+  }
+  catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 router.put('/:id',(req,res) =>{
