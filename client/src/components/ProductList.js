@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useSelector} from "react-redux";
 import '../App.css';
 import './ProductList.css';
 import axios from 'axios';
@@ -6,7 +7,12 @@ import {Link} from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 function ProductList() {
+  
+  const id = useSelector((state) => state.user._id);
+  // const [user, setUser] = useState(store);
   const [vegs, setVegs] = useState([]);
+  // console.log(user);
+  console.log(vegs);
 
   useEffect(() => {
     axios
@@ -18,11 +24,31 @@ function ProductList() {
         console.log('Error from Server');
       });
   }, []);
+  console.log(id);
+
+  const addToCart = async (productId) => {
+    try {
+      const response = await axios.put(`http://localhost:8082/add2cart/${id}`, {
+        productId,
+      },
+      {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+      );
+      // setUser({...user, cart: response.data.cart});
+    }
+    catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  };
+  
 
   const productList =
     vegs.length === 0
       ? 'There is no product record!'
-      : vegs.map((item, k) => <ProductCard product={item} key={k}/>);
+      : vegs.map((item, k) => <ProductCard key={k} product={item}   addToCart={()=>addToCart(item.id)}/>);
 
     return (
     <div>

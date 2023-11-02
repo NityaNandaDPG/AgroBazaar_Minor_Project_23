@@ -15,8 +15,7 @@ const connectDB=async()=>{
 };
 module.exports=connectDB;
 
-
-// {
-//     "mongoURI":
-//       "mongodb+srv://nnadkbdhupguri:E9bpWfrQT6bbO6Sv@nityananda.lqszq1v.mongodb.net/?retryWrites=true&w=majority"
-// }
+    // {
+    //     "mongoURI":
+    //     "mongodb+srv://admin_knt:cjAEpUjA5fYrWqiK@vegmart.7mwnczb.mongodb.net/?retryWrites=true&w=majority"
+    // }

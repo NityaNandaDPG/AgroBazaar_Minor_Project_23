@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
   },
   type: {
     type:String,
-    enum: ['Consumer', 'Farmer','Supervisor'],
+    enum: ['Consumer', 'Farmer'],
     required: true
   },
   address: {
@@ -63,7 +63,45 @@ const UserSchema = new mongoose.Schema({
     }
   },
   products:[
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      category: {
+        type: String,
+        default: 'Fruit',
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
 
+  ],
+  cart: [
+    {
+      product: {
+        type: String,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        default: 1
+      }
+    }
   ]
 })
 

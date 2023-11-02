@@ -7,20 +7,18 @@ import { loginRedux,logoutRedux } from "../redux/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail]=useState("");
+  const [password, setPassword]=useState("");
 
   const user=useSelector((state) => state.user);
   const dispatch=useDispatch();
-  if(user.isAuthenticated){
-    console.log("You are already logged in");
-    navigate("/");
-
-  }
+  // if(user.isAuthenticated){
+  //   alert("You are already logged in");
+  //   navigate("/");
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const response = await fetch("http://localhost:8082/auth/login", {
       method: "POST",
       crossDomain: true,
@@ -40,9 +38,7 @@ const Login = () => {
       dispatch(loginRedux(res));
       console.log(user);
       alert("Login Successful");
-
       navigate("/");
-      
     }
     else if (res.status==="error"){
       alert("Login Unsuccessful, Enter Valid Details");
@@ -80,7 +76,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onClick={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address

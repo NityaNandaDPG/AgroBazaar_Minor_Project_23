@@ -35,13 +35,14 @@ const MyProfile = () => {
 
   const handleLogout=()=>{
     dispatch(logoutRedux());
-    alert("Logout Out Successfull");
     window.localStorage.setItem("token", false);
+    window.localStorage.removeItem("token");
+    alert("Logout Out Successfull");
   };
+  
   useEffect(() => {
-    // Fetch updated user data when the component mounts
-    // You can dispatch an action to refresh user data here if needed
   }, [userData._id, dispatch]);
+
   const handleEditDetails = () => {};
   const navigate = useNavigate();
 
