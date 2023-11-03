@@ -6,6 +6,7 @@ const Basket = () => {
     const id = useSelector((state) => state.user._id);
     const [cart, setCart] = useState([]);
     const [productDetails, setProductDetails] = useState({});
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         axios.get(`http://localhost:8082/add2cart/${id}`)
@@ -29,7 +30,7 @@ const Basket = () => {
             .catch(error => {
                 console.error('Failed to fetch cart products:', error.message);
             });
-    }, [cart,id]);
+    }, [id,cart]);
 
     const removeFromCart = (productId) => {
         axios.delete(`http://localhost:8082/add2cart/${id}/remove/${productId}`)
@@ -44,12 +45,12 @@ const Basket = () => {
                 });
             })
             .catch(error => {
-                console.error('Failed to remove product from cart:', error.message);
+                console.error('Failed to remove the product from the cart:', error.message);
             });
     };
 
-    const updateQuantity = (productId, newQuantity) => {
-        axios.put(`http://localhost:8082/add2cart/${id}/update/${productId}/${newQuantity}`)
+    const updateQuantity = async (productId, newQuantity) => {
+        await axios.put(`http://localhost:8082/add2cart/${id}/update/${productId}/${newQuantity}`)
             .then(response => {
                 const updatedCart = response.data.cart;
                 setCart(updatedCart);
@@ -59,6 +60,20 @@ const Basket = () => {
                 console.error('Failed to update quantity:', error.message);
             });
     };
+
+    // Calculate individual prices for each item
+    const individualPrices = cart.map(item => {
+        const product = productDetails[item._id];
+        return product ? product.price * item.quantity : 0;
+    });
+
+    // Calculate the total price
+    const calculatedTotalPrice = individualPrices.reduce((total, price) => total + price, 0);
+
+    // Update the total price state
+    useEffect(() => {
+        setTotalPrice(calculatedTotalPrice);
+    }, [calculatedTotalPrice]);
 
     if (!cart) {
         return <p>Loading...</p>;
@@ -87,10 +102,14 @@ const Basket = () => {
                                     className="w-16 p-2 border border-gray-300 rounded"
                                 />
                             </div>
+                            <span>₹{(productDetails[item._id]?.price * item.quantity).toFixed(2)}</span>
                         </div>
                     </li>
                 ))}
             </ul>
+            <div className="mt-4">
+                <strong>Total Price: ₹{totalPrice.toFixed(2)}</strong>
+            </div>
         </div>
     );
 };
