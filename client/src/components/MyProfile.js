@@ -31,7 +31,16 @@ const MyProfile = () => {
   const productList =
   vegs.length === 0
     ? 'There is no product record!'
-    : vegs.map((item, k) => <ProductCard product={item} key={k}/>);
+    : vegs.map((item, k) =>
+    
+      <div key={k} className="product-box">
+      <img src={item.image} alt={item.name} />
+      <h2>{item.name}</h2>
+      <p>{item.description}</p>
+      <div className="product-price">₹{item.price}</div>
+    </div>
+    // <ProductCard product={item} key={k}/>
+    );
 
   const handleLogout=()=>{
     dispatch(logoutRedux());

@@ -8,12 +8,6 @@ const initialState = {
   firstname: "",
   lastname:"",
   avatar: "",
-  cart:[
-    {
-      product: null,
-      quantity: 1,
-    }
-  ]
 };
 
 export const userSlice = createSlice({
@@ -38,14 +32,7 @@ export const userSlice = createSlice({
       state.avatar="";
       state.isAuthenticated=false;
     },
-    cartIn: (state, action) => {
-      console.log(action.payload.data);
-      state.cart.push(action.payload.data);
-    },
-    cartOut: (state, action) => {
-      console.log(action.payload.data);
-      state.cart.pop(action.payload.data);
-    }
+
   }
 });
 

@@ -9,14 +9,11 @@ import ProductCard from './ProductCard';
 function ProductList() {
   
   const id = useSelector((state) => state.user._id);
-  // const [user, setUser] = useState(store);
   const [vegs, setVegs] = useState([]);
-  // console.log(user);
-  console.log(vegs);
 
   useEffect(() => {
     axios
-      .get('http://localhost:8082/products/')
+      .get('http://localhost:8082/products/all')
       .then((res) => {
         setVegs(res.data);
       })
@@ -24,7 +21,6 @@ function ProductList() {
         console.log('Error from Server');
       });
   }, []);
-  console.log(id);
 
   const addToCart = async (productId) => {
     try {
@@ -37,7 +33,6 @@ function ProductList() {
         },
     }
       );
-      // setUser({...user, cart: response.data.cart});
     }
     catch (error) {
       console.error('Error adding to cart:', error);
@@ -48,7 +43,7 @@ function ProductList() {
   const productList =
     vegs.length === 0
       ? 'There is no product record!'
-      : vegs.map((item, k) => <ProductCard key={k} product={item}   addToCart={()=>addToCart(item.id)}/>);
+      : vegs.map((item, k) => <ProductCard key={k} product={item}   addToCart={()=>addToCart(item._id)}/>);
 
     return (
     <div>

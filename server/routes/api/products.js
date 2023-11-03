@@ -21,15 +21,40 @@ router.put('/new/:id', async (req,res) => {
   }
 });
 
-router.get('/',async (req, res) => {
+router.get('/all',async (req, res) => {
   try {
     const users = await User.find({}, 'products');
     const allProducts = users.reduce((acc, user) => acc.concat(user.products), []);
+    console.log(typeof allProducts);
     res.json(allProducts);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+router.get('/all/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const users = await User.find({}, 'products');
+    const foundProduct = users.reduce((acc, user) => {
+      const product = user.products.find((product) => product._id.toString() === productId);
+      if (product) {
+        acc = product;
+      }
+      return acc;
+    }, null);
+
+    if (foundProduct) {
+      res.json(foundProduct);
+    } else {
+      res.status(404).json({ error: 'Product not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 router.get('/:id',async (req, res) => {
   try {

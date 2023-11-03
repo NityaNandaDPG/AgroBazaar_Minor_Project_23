@@ -4,7 +4,7 @@ import './ProductCard.css';
 
 const ProductCard = ({ product, addToCart}) => {
   const handleAddToCart = () => {
-    addToCart(product._id); // Call the addToCart function with the product's ID
+    addToCart(product._id);
   };
 
   return (
@@ -19,7 +19,6 @@ const ProductCard = ({ product, addToCart}) => {
         >
           Add to Cart
         </button>
-        {/* <Link to='/basket' className='btn btn-outline-warning float-right'>Add to Bag</Link> */}
     </div>
   );
 };

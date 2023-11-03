@@ -5,3 +5,9 @@ Instructions:
 4. run `npm install` for root, server, client directory
 3. run `npm start`
 4. Enjoy
+
+Clear Cache:
+`git rm -r --cached .`
+`git add .`
+`git commit -am 'git cache cleared' `
+`git push`

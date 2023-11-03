@@ -5,8 +5,6 @@ import Footer from './Footer';
 
 function Home() {
   const store = useSelector((state) => state.user);
-  console.log(store);
-  // console.log(window.localStorage.getItem("token"));
 
   return (
     
@@ -23,5 +21,4 @@ function Home() {
 
   );
 }
-
 export default Home;
