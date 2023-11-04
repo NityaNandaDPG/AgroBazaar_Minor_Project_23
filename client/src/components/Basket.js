@@ -84,33 +84,47 @@ const Basket = () => {
     }
 
     return (
-        <div className="bg-white rounded p-4 shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
-            <ul>
-                {cart.map((item, i) => (
-                    <li key={i}>
-                        <div className="flex justify-between items-center mb-2">
-                            <span>{productDetails[item._id]?.name || 'Product Name Not Found'}</span>
-                            <div className="flex items-center space-x-2">
-                                <button className="text-red-500" onClick={() => removeFromCart(item._id)}>
-                                    Remove
-                                </button>
-                                <input
-                                    type="number"
-                                    value={item.quantity}
-                                    onChange={(e) => updateQuantity(item._id, e.target.value)}
-                                    className="w-16 p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <span>₹{(productDetails[item._id]?.price * item.quantity).toFixed(2)}</span>
+<div className="bg-white rounded p-4 shadow-md">
+    <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
+    <ul>
+        {cart.map((item, i) => (
+            <li key={i} className="border-b border-gray-300 py-2">
+                <div className="flex items-center justify-between">
+                    <div className="w-2/5">
+                        <span>{productDetails[item._id]?.name || 'Product Name Not Found'}</span>
+                    </div>
+                    <div className="w-2/5 flex justify-center items-center space-x-2">
+                        <button className="text-red-500" onClick={() => removeFromCart(item._id)}>
+                            Remove
+                        </button>
+                        <div className="flex items-center">
+                            <button
+                                onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                                className="w-8 h-8 bg-gray-500 text-white text-lg font-bold cursor-pointer"
+                            >
+                                -
+                            </button>
+                            <span className="mx-2 text-xl">{item.quantity}</span>
+                            <button
+                                onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                                className="w-8 h-8 bg-gray-500 text-white text-lg font-bold cursor-pointer"
+                            >
+                                +
+                            </button>
                         </div>
-                    </li>
-                ))}
-            </ul>
-            <div className="mt-4">
-                <strong>Total Price: ₹{totalPrice.toFixed(2)}</strong>
-            </div>
-        </div>
+                    </div>
+                    <div className="w-1/5 text-right">
+                        <span>₹{(productDetails[item._id]?.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                </div>
+            </li>
+        ))}
+    </ul>
+    <div className="mt-4">
+        <strong>Total Price: ₹{totalPrice.toFixed(2)}</strong>
+    </div>
+</div>
+
     );
 };
 

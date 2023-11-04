@@ -28,18 +28,51 @@ const MyProfile = () => {
     console.log('Error from Server');
   }
 
-  const productList =
-  vegs.length === 0
-    ? 'There is no product record!'
-    : vegs.map((item, k) =>
-    
-      <div key={k} className="product-box">
-      <img src={item.image} alt={item.name} />
-      <h2>{item.name}</h2>
-      <p>{item.description}</p>
-      <div className="product-price">₹{item.price}</div>
-    </div>
-    // <ProductCard product={item} key={k}/>
+  const productList =(
+<table className="table-auto w-full ">
+  <thead>
+    <tr>
+      <th className="px-4 py-2">Image</th>
+      <th className="px-4 py-2">Name</th>
+      <th className="px-4 py-2">Description</th>
+      <th className="px-4 py-2">Price</th>
+      <th className="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {vegs.length === 0 ? (
+      <tr>
+        <td className="px-4 py-2" colSpan="4">
+          There is no product record!
+        </td>
+      </tr>
+    ) : (
+      vegs.map((item, k) => (
+        <tr key={k}>
+          <td className="px-4 py-2">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-12 h-12 object-cover"
+            />
+          </td>
+          <td className="px-4 py-2">{item.name}</td>
+          <td className="px-4 py-2">{item.description}</td>
+          <td className="px-4 py-2">{item.price}</td>
+          <td className="px-4 py-2">
+            <button className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700 mr-2">
+              Modify
+            </button>
+            <button className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))
+    )}
+  </tbody>
+</table>
+
     );
 
   const handleLogout=()=>{
@@ -114,24 +147,18 @@ const MyProfile = () => {
           </div>
         </CardBody>
       </Card>
+
       <Card>
         <CardBody>
           <div>
             {userData.isAuthenticated? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <h3>
+              <div>
+                <h3 className="bg-gray-800 text-white py-4 text-xl font-semibold text-center">
                 My Products
                 </h3>
-                <div className='grid-container'>
+                <div>
                   {productList}
                 </div>
-                
               </div>
             ) : (
               ""

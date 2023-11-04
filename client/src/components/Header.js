@@ -15,7 +15,8 @@ function Header(){
             <a href='/'><AiFillHome/></a>
             <a href='#'>Today's Market</a>
             <a href='#'>Vegetables</a>
-            <a href='#'>Grocery</a>
+            <a href='#'>Fruits</a>
+            <a href='#'>Foods</a>
             <form className='search-box'>
                 <input className="input" type="text" placeholder="Search for Vegetables, Farmers and more"/>
                 <button className="button" type='submit'><AiOutlineSearch /></button>
