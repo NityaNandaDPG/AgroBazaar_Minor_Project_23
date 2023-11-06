@@ -14,3 +14,8 @@ const connectDB=async()=>{
     }
 };
 module.exports=connectDB;
+
+    // {
+    //     "mongoURI":
+    //     "mongodb+srv://admin_knt:cjAEpUjA5fYrWqiK@vegmart.7mwnczb.mongodb.net/?retryWrites=true&w=majority"
+    // }

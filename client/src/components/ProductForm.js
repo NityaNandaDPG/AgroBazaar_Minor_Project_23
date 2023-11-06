@@ -7,39 +7,39 @@ import { useNavigate } from 'react-router-dom';
 const CreateBook = (props) => {
   // Define the state with useState hook
   const navigate = useNavigate();
-  const [book, setBook] = useState({
-    title: '',
-    isbn: '',
-    author: '',
-    description: '',
-    published_date: '',
-    publisher: '',
+  const [product, setProduct] = useState({
+    name: "",
+    description:"",
+    author: "",
+    color: "",
+    price: "",
+    image:"",
   });
 
   const onChange = (e) => {
-    setBook({ ...book, [e.target.name]: e.target.value });
+    setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     axios
-      .post('http://localhost:8082/api/books', book)
+      .post('http://localhost:8082/api/vegs', product)
       .then((res) => {
-        setBook({
-          title: '',
-          isbn: '',
-          author: '',
-          description: '',
-          published_date: '',
-          publisher: '',
+        setProduct({
+            name: "",
+            description:"",
+            author: "",
+            color: "",
+            price: "",
+            image:"",
         });
 
         // Push to /
         navigate('/');
       })
       .catch((err) => {
-        console.log('Error in CreateBook!');
+        console.log('Error in post Product!');
       });
   };
 
@@ -50,33 +50,21 @@ const CreateBook = (props) => {
           <div className='col-md-8 m-auto'>
             <br />
             <Link to='/' className='btn btn-outline-warning float-left'>
-              Show BooK List
+              Show Vegetable List
             </Link>
           </div>
           <div className='col-md-8 m-auto'>
-            <h1 className='display-4 text-center'>Add Book</h1>
-            <p className='lead text-center'>Create new book</p>
+            <h1 className='display-4 text-center'>Post your Vegetable</h1>
+            {/* <p className='lead text-center'>Create new book</p> */}
 
             <form noValidate onSubmit={onSubmit}>
               <div className='form-group'>
                 <input
                   type='text'
-                  placeholder='Title of the Book'
-                  name='title'
+                  placeholder='Name of the Vegetable'
+                  name='name'
                   className='form-control'
-                  value={book.title}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-
-              <div className='form-group'>
-                <input
-                  type='text'
-                  placeholder='ISBN'
-                  name='isbn'
-                  className='form-control'
-                  value={book.isbn}
+                  value={product.name}
                   onChange={onChange}
                 />
               </div>
@@ -84,45 +72,60 @@ const CreateBook = (props) => {
               <div className='form-group'>
                 <input
                   type='text'
-                  placeholder='Author'
-                  name='author'
-                  className='form-control'
-                  value={book.author}
-                  onChange={onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <input
-                  type='text'
-                  placeholder='Describe this book'
+                  placeholder='Description of the Vegetable'
                   name='description'
                   className='form-control'
-                  value={book.description}
+                  value={product.description}
                   onChange={onChange}
                 />
               </div>
 
               <div className='form-group'>
                 <input
-                  type='date'
-                  placeholder='published_date'
-                  name='published_date'
+                  type='text'
+                  placeholder='Farmer Name'
+                  name='author'
                   className='form-control'
-                  value={book.published_date}
+                  value={product.author}
                   onChange={onChange}
                 />
               </div>
+
               <div className='form-group'>
                 <input
                   type='text'
-                  placeholder='Publisher of this Book'
-                  name='publisher'
+                  placeholder='Color of the Vegetable'
+                  name='color'
                   className='form-control'
-                  value={book.publisher}
+                  value={product.color}
                   onChange={onChange}
                 />
               </div>
+
+              <div className='form-group'>
+                <input
+                  type='number'
+                  placeholder='Price of the Vegetable'
+                  name='price'
+                  className='form-control'
+                  value={product.price}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
+              <input 
+                type="text" 
+                placeholder='Vegetable Image URL '
+                name="image" 
+                className='form-control'
+                value={product.image}
+                onChange={onChange}
+                // id="imageUpload" 
+                // accept="image/*"
+              />
+                </div>
+
 
               <input
                 type='submit'
