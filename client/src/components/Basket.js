@@ -114,7 +114,8 @@ const Basket = () => {
                         </div>
                     </div>
                     <div className="w-1/5 text-right">
-                        <span>₹{(productDetails[item._id]?.price * item.quantity).toFixed(2)}</span>
+                        {/* <span>₹{(productDetails[item._id]?.price * item.quantity).toFixed(2)}</span> */}
+                        <span>₹{(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                 </div>
             </li>
