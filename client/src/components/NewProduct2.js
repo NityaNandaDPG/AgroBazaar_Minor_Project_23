@@ -22,9 +22,9 @@ const NewProduct1 = () => {
         isError: false,
     });
     const [users, setusers] = useState([]);
-    useEffect(() => {
-        // console.log(data);
-    }, [data]);
+    // useEffect(() => {
+    //     // console.log(data);
+    // }, [data]);
 
     const handleChange = (event, property) => {
         setData({ ...data, [property]: event.target.value });
@@ -74,7 +74,7 @@ const NewProduct1 = () => {
             if (sdata.status === "ok") {
                 alert("Post Successful");
                 resetData();
-                navigate("/profile");
+                navigate("/myproduct");
             } else {
                 alert(sdata.err || "An error occurred during Posting.");
             }

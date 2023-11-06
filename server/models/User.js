@@ -93,12 +93,44 @@ const UserSchema = new mongoose.Schema({
   ],
   cart: [
     {
+      name:{
+        type:String,
+      },
       quantity: {
         type: Number,
         default: 1
+      },
+      price:{
+        type: Number,
+        required: true
       }
     }
-  ]
+  ],
+  addresses: [
+    {
+    street: {
+      type: String,
+      required: false
+    },
+    city: {
+      type: String,
+      required: false
+    },
+    state: {
+      type: String,
+      required: false
+    },
+    country: {
+      type: String,
+      default: 'India',
+      required: false
+    },
+    pin: {
+      type: Number,
+      required: false
+    }
+  }
+]
 })
 
 const User=mongoose.model('User', UserSchema);
