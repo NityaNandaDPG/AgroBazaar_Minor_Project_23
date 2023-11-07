@@ -6,6 +6,7 @@ const products=require('./routes/api/products');
 const auth=require('./routes/api/auth');
 const admin=require('./routes/api/admin');
 const cart=require('./routes/api/cart');
+const payment=require('./routes/api/payment');
 
 const app=express();
 connectDB();
@@ -21,6 +22,7 @@ app.use('/admin', admin);
 app.use('/auth', auth);
 app.use('/products', products);
 app.use('/add2cart', cart);
+app.use('/payment', payment);
 
 const port=process.env.PORT || 8082;
 app.listen(port,()=>console.log(`Server running on port ${port}`));
