@@ -26,16 +26,22 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const addToCart = async (productId, p_name, price) => {
-    try {
-      const response = await axios.put(`http://localhost:8082/add2cart/${id}`, {
-        productId,
-        p_name,
-        price,
+  const addToCart = (productId, p_name, price) => {
+    return axios.put(`http://localhost:8082/add2cart/${id}`, {
+      productId,
+      p_name,
+      price,
+    })
+      .then(response => {
+        // Handle success
+        console.log('Successfully added to cart:', response.data);
+        alert('Successfully added to cart:', response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error adding to cart:', error);
+        alert("Failed to add to Cart");
       });
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
   };
 
   const handleSearchChange = (e) => {

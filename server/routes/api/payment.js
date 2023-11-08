@@ -7,9 +7,9 @@ paypal.configure({
     'client_secret': 'EFkwCXdHvx2pgdR6apsccV-wQohufcaX63FIY0Gwp8fb75g1me0Y8_jcGiq4A80gNKoaD3TB8NlJWKCn'
 });
 
-const app = express();
+const app = express.Router();
 
-app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
+// app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
 
 app.post('/pay', (req, res) => {
     const create_payment_json = {
@@ -18,8 +18,8 @@ app.post('/pay', (req, res) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/success",
-            "cancel_url": "http://localhost:3000/cancel"
+            "return_url": "http://localhost:3600/success",
+            "cancel_url": "http://localhost:3600/cancel"
         },
         "transactions": [{
             "item_list": {
@@ -80,4 +80,4 @@ app.post('/pay', (req, res) => {
 
 app.get('/cancel', (req, res) => res.send('Cancelled'));
 
-app.listen(3000, () => console.log(`Server Started on 3000`));
+module.exports=app;
