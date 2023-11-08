@@ -9,10 +9,13 @@ import MyProfile from './components/MyProfile';
 import Error from './components/Error';
 import ProductList from './components/ProductList';
 import NewProduct2 from './components/NewProduct2';
+import MyProduct from './components/MyProduct';
+import UpdateProduct from './components/UpdateProduct'; 
 import Basket from './components/Basket';
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Temp from './temp/Temp';
 import Messenger from "./pages/messenger/Messenger";
+
 
 function App2() {
   const router = createBrowserRouter(
@@ -26,6 +29,8 @@ function App2() {
               <Route path="signup" element={<SignUp1/>}/>
               <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>}/>
               <Route path="form" element={<ProtectedRoute><NewProduct2/></ProtectedRoute>}/>
+              <Route path="myproduct" element={<ProtectedRoute><MyProduct /></ProtectedRoute>}/>
+              <Route path="updateproduct/:productId" element={<ProtectedRoute><UpdateProduct/></ProtectedRoute>}/>
               <Route path="basket" element={<ProtectedRoute><Basket/></ProtectedRoute>}/>
               <Route path="*" element={<Error/>}/>
               <Route path="temp" element={<Temp />}/>
