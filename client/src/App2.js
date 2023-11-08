@@ -12,6 +12,7 @@ import NewProduct2 from './components/NewProduct2';
 import Basket from './components/Basket';
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Temp from './temp/Temp';
+import Messenger from "./pages/messenger/Messenger";
 
 function App2() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ function App2() {
             <Route exact path='/' element={<Home/>}>
               {/* <Route index element={<MarketPrice/>}/> */}
               <Route index element={<ProductList/>}/>
+              <Route path="messenger" element={<Messenger/>}/>
               <Route path="admin" element={<AdminPanel/>}/>
               <Route path="login" element={<Login/>}/>
               <Route path="signup" element={<SignUp1/>}/>

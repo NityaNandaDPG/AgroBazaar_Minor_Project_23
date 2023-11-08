@@ -35,7 +35,7 @@ function Header(){
             <a href='#'>Wishlist</a>
             {/* <a href=''>Bag</a> */}
             <Link to="/basket"><AiOutlineShoppingCart/></Link>
-            <a href='#'><BiChat/></a>
+            <Link to="/messenger"><BiChat/></Link>
         </header>
     );
 }
