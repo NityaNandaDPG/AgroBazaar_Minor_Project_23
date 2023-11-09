@@ -22,7 +22,7 @@ const UpdateProduct = () => {
         error: {},
         isError: false,
     });
-    const [users, setusers] = useState([]);
+    // const [users, setusers] = useState([]);
 
     const { productId } = useParams();
 
