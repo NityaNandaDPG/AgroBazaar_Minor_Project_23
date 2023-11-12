@@ -14,7 +14,7 @@ const Basket = () => {
       .get(`http://localhost:8082/add2cart/${id}`)
       .then((res) => {
         setCart(res.data);
-        // Fetch product details for each item in the cart
+
         res.data.forEach((item) => {
           axios
             .get(`http://localhost:8082/products/all/${item._id}`)
@@ -33,7 +33,7 @@ const Basket = () => {
       .catch((error) => {
         console.error("Failed to fetch cart products:", error.message);
       });
-  }, [id]);
+  }, []);
 
   const removeFromCart = (productId) => {
     axios

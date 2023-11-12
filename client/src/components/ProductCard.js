@@ -9,8 +9,8 @@ const ProductCard = ({ product, addToCart }) => {
 
   return (
     <Link to={{
-      pathname: `/preview/${product.id}`,
-      // state: { addToCart } // Pass the addToCart function in the state
+      pathname: `/preview/${product._id}`,
+      state: { addToCart } // Pass the addToCart function in the state
     }} className="group block no-underline">
       <div className="border p-2 m-4 w-64 h-96 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300">
         <img src={product.image} alt={product.name} className="object-cover w-full h-48" />

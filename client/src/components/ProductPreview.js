@@ -6,11 +6,6 @@ import axios from 'axios';
 const ProductPreview = () => {
     const id = useSelector((state) => state.user._id);
 
-    // const location = useLocation();
-    // const { state } = location && location.state;
-    // const addToCart = state && state.addToCart;
-    // console.log(state);
-
     const [data, setData] = useState({
         // id:"",
         name: "",
@@ -21,6 +16,7 @@ const ProductPreview = () => {
     });
 
     const { productId } = useParams();
+    console.log("Param Id: "+productId)
 
     useEffect(() => {
         axios
@@ -36,7 +32,7 @@ const ProductPreview = () => {
                 });
             })
             .catch((err) => {
-                console.log('Error from Update Product');
+                console.log('Faild to  fetch Product');
             });
     }, [productId]);
 

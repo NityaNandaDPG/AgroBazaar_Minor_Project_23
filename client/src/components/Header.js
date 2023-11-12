@@ -27,12 +27,12 @@ function Header(){
                     <Link to="/login">Login</Link>
                     <Link to="/profile">My Profile</Link>
                     <a href="#">My Order</a>
-                    <Link to="/myproduct">My Products</Link>
+                    {/* <Link to="/myproduct">My Products</Link> */}
 
                     
                 </div>
             </div>
-            <a href='#'>Wishlist</a>
+            <a href="/myproduct">Selling Hub</a>
             {/* <a href=''>Bag</a> */}
             <Link to="/basket"><AiOutlineShoppingCart/></Link>
             <a href='#'><BiChat/></a>

@@ -6,13 +6,15 @@ import ProductCard from './ProductCard';
 
 function ProductList() {
   const id = useSelector((state) => state.user._id);
+  const u = useSelector((state) => state.user);
   const [vegs, setVegs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(u);
     async function fetchProducts() {
       try {
         const response = await axios.get('http://localhost:8082/products/all');

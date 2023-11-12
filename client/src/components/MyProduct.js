@@ -77,7 +77,7 @@ const MyProduct = () => {
                             <td className="px-4 py-2">{item.price}</td>
                             <td className="px-4 py-2">
                                 <Link className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700 mr-2"
-                                    to={`/updateproduct/${item.id}`}>
+                                    to={`/updateproduct/${item._id}`}>
                                     Modify
                                 </Link>
 

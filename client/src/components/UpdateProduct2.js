@@ -5,12 +5,11 @@ import { BsCloudUpload } from "react-icons/bs";
 // import { imgtobase } from "../utility/imgtobase";
 import axios from 'axios';
 
-const UpdateProduct = () => {
+const UpdateProduct2 = () => {
     const id = useSelector((state) => state.user._id);
     const [vegs, setVegs] = useState([]);
     const navigate = useNavigate();
     const [data, setData] = useState({
-        _id:"",
         id:"",
         name: "",
         category: "",
@@ -26,13 +25,13 @@ const UpdateProduct = () => {
     const [users, setusers] = useState([]);
 
     const { productId } = useParams();
+    console.log(productId);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8082/products/all/${productId}`)
+            .get(`http://localhost:8082/seller/seller-info/${id}`)
             .then((res) => {
                 setData({
-                    _id:res.data._id,
                     id:res.data.id,
                     name: res.data.name,
                     category:res.data.category,
@@ -44,7 +43,7 @@ const UpdateProduct = () => {
             .catch((err) => {
                 console.log('Error from Update Product');
             });
-    }, [id]);
+    }, []);
 
     const handleChange = (event, property) => {
         setData({ ...data, [property]: event.target.value });
@@ -52,6 +51,7 @@ const UpdateProduct = () => {
 
     const resetData = () => {
         setData({
+            id:"",
             name: "",
             category: "",
             image: "",
@@ -78,8 +78,8 @@ const UpdateProduct = () => {
         try {
             // const randomPartOfId = Math.floor(Math.random() * 10000);
             // const productID = `${data.category}-${randomPartOfId}`;
-            // data.id = productID;
-            const response = await axios.put(`http://localhost:8082/products/new/${id}`, data, {
+            // productId=data.id;
+            const response = await axios.put(`http://localhost:8082/${id}/seller-details/products/${productId}`, data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -93,7 +93,7 @@ const UpdateProduct = () => {
             if (sdata.status === "ok") {
                 alert("Post Successful");
                 resetData();
-                navigate("/myproduct");
+                navigate("/sellerhub");
             } else {
                 alert(sdata.err || "An error occurred during Posting.");
             }
@@ -253,4 +253,4 @@ const UpdateProduct = () => {
         </form>
     );
 };
-export default UpdateProduct;
+export default UpdateProduct2;

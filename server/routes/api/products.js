@@ -2,25 +2,81 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User.js");
 
+// router.put("/new/:id", async (req, res) => {
+//   const newProduct = req.body;
+//   try {
+//     const existingUser = await User.findOneAndUpdate(
+//       { _id: req.params.id },
+//       { $push: { products: { $each: [newProduct] } } }
+//     );
+
+//     if (!existingUser) {
+//       return res.status(404).json({ error: "You have to log in first!" });
+//     }
+//     res
+//       .status(200)
+//       .json({ status: "ok", message: "Products field updated successfully" });
+//   } catch (error) {
+//     console.error("Error:", error);
+//     res.status(500).json({ error: "Server error" });
+//   }
+// });
+
+
+
 router.put("/new/:id", async (req, res) => {
   const newProduct = req.body;
+  console.log(req.params.id);
+  console.log(newProduct._id);
   try {
-    const existingUser = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $push: { products: { $each: [newProduct] } } }
+    // Try to update the existing product
+    const updateResult = await User.findOneAndUpdate(
+      { _id: req.params.id, "products._id": newProduct._id },
+      {
+        $set: {
+          "products.$": newProduct,
+        },
+      },
+      { new: true }
     );
 
-    if (!existingUser) {
+    if (updateResult) {
+      // If the update was successful, return the updated document
+      return res.status(200).json({
+        status: "ok",
+        message: "Product updated successfully",
+        data: updateResult.products,
+      });
+    }
+
+    // If the update failed, it means the product doesn't exist, so add a new product
+    const addResult = await User.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $addToSet: {
+          products: newProduct,
+        },
+      },
+      { new: true }
+    );
+
+    if (!addResult) {
       return res.status(404).json({ error: "You have to log in first!" });
     }
-    res
-      .status(200)
-      .json({ status: "ok", message: "Products field updated successfully" });
+
+    res.status(200).json({
+      status: "ok",
+      message: "Product added successfully",
+      data: addResult.products,
+    });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
+
+
 
 router.get("/all", async (req, res) => {
   try {
@@ -42,7 +98,7 @@ router.get("/all/:productId", async (req, res) => {
     const users = await User.find({}, "products");
     const foundProduct = users.reduce((acc, user) => {
       const product = user.products.find(
-        (product) => product._id.toString() === productId
+        (product) => product._id.toString()===productId
       );
       if (product) {
         acc = product;
@@ -89,6 +145,35 @@ router.delete("/:id", (req, res) => {
   Product.findByIdAndRemove(req.params.id, req.body)
     .then((book) => res.json({ mgs: "Vegetable entry deleted successfully" }))
     .catch((err) => res.status(404).json({ error: "No such a Vegetable" }));
+});
+
+
+router.delete('/:userId/:productId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const productId = req.params.productId;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const productIndex = user.products.findIndex(product => product.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    user.products.splice(productIndex, 1);
+
+    await user.save();
+
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 module.exports = router;
