@@ -1,109 +1,225 @@
-  const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-  const UserSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true
-    },
+const UserSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true
+  },
 
+  firstname: {
+    type: String,
+    required: true
+  },
 
-    firstname: {
-      type: String,
-      required: true
-    },
+  lastname: {
+    type: String,
+    required: true
+  },
 
+  email: {
+    type: String,
+    required: true
+  },
 
+  password: {
+    type: String,
+    required: true,
+  },
 
-    lastname: {
-      type: String,
-      required: true
-    },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female', 'Others'],
+    required: true
+  },
 
+  dob: {
+    type: Date,
+    required: true
+  },
 
-    email: {
-      type: String,
-      required: true
-    },
+  avatar: {
+    type: String,
+    required: false
+  },
 
+  type: {
+    type: String,
+    enum: ['Consumer', 'Farmer'],
+    required: true
+  },
 
-    password: {
-      type: String,
-      required: true,
-    },
+  // seller_details: {
+  //   name: {
+  //     type: String,
+  //     required: false
+  //   },
+  //   products: [
+  //     {
+  //       id: {
+  //         type: String,
+  //         required: false,
+  //       },
+  //       name: {
+  //         type: String,
+  //         required:false,
+  //       },
+  //       category: {
+  //         type: String,
+  //         default: 'Fruit',
+  //       },
+  //       image: {
+  //         type: String,
+  //         required: false,
+  //       },
+  //       price: {
+  //         type: Number,
+  //         required: false,
+  //       },
+  //       description: {
+  //         type: String,
+  //         required: false,
+  //       },
+  //     },
 
+  //   ],
 
-    gender: {
-      type: String,
-      enum: ['Male', 'Female', 'Others'],
-      required: true
-    },
+  //   reviews: [{
+  //     id:{
+  //       type: String,
+  //       required: false
+  //     }
 
+  //   }],
+  // },
 
-    dob: {
-      type: Date,
-      required: true
-    },
-
-
-    avatar: {
+  address: {
+    street: {
       type: String,
       required: false
     },
-
-
-    type: {
+    city: {
       type: String,
-      enum: ['Consumer', 'Farmer'],
-      required: true
+      required: false
     },
+    state: {
+      type: String,
+      required: false
+    },
+    country: {
+      type: String,
+      default: 'India',
+      required: false
+    },
+    pin: {
+      type: Number,
+      required: false
+    }
+  },
 
-
-    seller_details: {
+  products: [
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      seller_id: {
+        type: String,
+        required: true,
+      },
       name: {
         type: String,
-        required: false
+        required: true,
       },
-      products: [
-        {
-          id: {
-            type: String,
-            required: false,
-          },
-          name: {
-            type: String,
-            required:false,
-          },
-          category: {
-            type: String,
-            default: 'Fruit',
-          },
-          image: {
-            type: String,
-            required: false,
-          },
-          price: {
-            type: Number,
-            required: false,
-          },
-          description: {
-            type: String,
-            required: false,
-          },
-        },
-    
-      ],
-      
-      reviews: [{
-        id:{
-          type: String,
-          required: false
-        }
-
-      }],
+      category: {
+        type: String,
+        default: 'Fruit',
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
     },
+  ],
 
+  cart: [
+    {
+      seller_id: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+        default: 1
+      },
+      price: {
+        type: Number,
+        required: true
+      }
+    }
+  ],
 
-    address: {
+  orders: [{
+    cart: [
+      {
+        seller_id: {
+          type: String,
+        },
+        name: {
+          type: String,
+        },
+        quantity: {
+          type: Number,
+          default: 1
+        },
+        price: {
+          type: Number,
+          required: true
+        }
+      }
+    ],
+    payment_id: {
+      type: String,
+      required: false
+    }
+  }],
+
+  consumer_orders: [{
+    cart: [
+      {
+        name: {
+          type: String,
+        },
+        quantity: {
+          type: Number,
+          default: 1
+        },
+        price: {
+          type: Number,
+          required: true
+        }
+      }
+    ],
+    consumer_id: {
+      type: String,
+    },
+    payment_id: {
+      type: String,
+      required: false
+    }
+  }],
+
+  addresses: [
+    {
       street: {
         type: String,
         required: false
@@ -125,92 +241,19 @@
         type: Number,
         required: false
       }
-    },
+    }
+  ],
 
-
-    products: [
-      {
-        id: {
-          type: String,
-          required: true,
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        category: {
-          type: String,
-          default: 'Fruit',
-        },
-        image: {
-          type: String,
-          required: true,
-        },
-        price: {
-          type: Number,
-          required: true,
-        },
-        description: {
-          type: String,
-          required: true,
-        },
-      },
-
-    ],
-
-
-    cart: [
-      {
-        name: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-          default: 1
-        },
-        price: {
-          type: Number,
-          required: true
-        }
+  review_post: [
+    {
+      post: {
+        type: String,
+        required: false
       }
-    ],
+    }
+  ]
 
+})
 
-    addresses: [
-      {
-        street: {
-          type: String,
-          required: false
-        },
-        city: {
-          type: String,
-          required: false
-        },
-        state: {
-          type: String,
-          required: false
-        },
-        country: {
-          type: String,
-          default: 'India',
-          required: false
-        },
-        pin: {
-          type: Number,
-          required: false
-        }
-      }
-    ],
-    review_post:[
-      {
-        post:{
-          type:String,
-          required:false
-        }
-      }
-    ]
-
-  })
-
-  const User = mongoose.model('User', UserSchema);
-  module.exports = User;
+const User = mongoose.model('User', UserSchema);
+module.exports = User;

@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 function ProductList() {
-  const id = useSelector((state) => state.user._id);
-  const u = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  // const id = useSelector((state) => state.user._id);
+  const id=user._id;  
+  const isAuthenticated=user.isAuthenticated;
+
   const [vegs, setVegs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -14,11 +17,11 @@ function ProductList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(u);
     async function fetchProducts() {
       try {
         const response = await axios.get('http://localhost:8082/products/all');
         setVegs(response.data);
+        
         setLoading(false); // Set loading to false when data is loaded
       } catch (error) {
         console.error('Error from Server:', error);
@@ -28,19 +31,18 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const addToCart = (productId, p_name, price) => {
+  const addToCart = (productId,seller_id, p_name, price) => {
     return axios.put(`http://localhost:8082/add2cart/${id}`, {
       productId,
+      seller_id,
       p_name,
       price,
     })
       .then(response => {
-        // Handle success
-        console.log('Successfully added to cart:', response.data);
-        alert('Successfully added to cart:', response.data);
+        console.log(response.data.message);
+        alert(response.data.message);
       })
       .catch(error => {
-        // Handle error
         console.error('Error adding to cart:', error);
         alert("Failed to add to Cart");
       });
@@ -83,7 +85,7 @@ function ProductList() {
       'No matching products found.'
     ) : (
       vegs.map((item, k) => (
-        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.name, item.price)} />
+        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.seller_id,item.name, item.price)} />
       ))
     );
 

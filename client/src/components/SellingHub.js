@@ -5,25 +5,40 @@ import { logoutRedux } from "../redux/userSlice";
 import { Navigate, useNavigate, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
-const MyProduct = () => {
+const SellingHub = () => {
     const userData = useSelector((state) => state.user);
     const id = useSelector((state) => state.user._id);
     const [vegs, setVegs] = useState([]);
+    const [consumerOrders, setConsumerOrders] = useState([]);
 
     const dispatch = useDispatch();
-    try {
-        axios
-            .get(`http://localhost:8082/products/${id}`)
-            .then((res) => {
-                setVegs(res.data);
+
+    useEffect(() => {
+        try {
+            axios
+                .get(`http://localhost:8082/products/${id}`)
+                .then((res) => {
+                    setVegs(res.data);
+                })
+                .catch((err) => {
+                    console.log('Error from Server');
+                });
+        }
+        catch (error) {
+            console.log('Error from Server');
+        }
+    }, [id]);
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:8082/order/consumer_orders/${id}`)
+            .then(response => {
+                setConsumerOrders(response.data);
             })
-            .catch((err) => {
-                console.log('Error from Server');
+            .catch(error => {
+                console.error('Error fetching consumer orders:', error);
             });
-    }
-    catch (error) {
-        console.log('Error from Server');
-    }
+    }, []);
 
     const handleDeleteClick = async (itemId) => {
         const confirmed = window.confirm(`Are you sure you want to delete item with ID ${itemId}`);
@@ -31,18 +46,17 @@ const MyProduct = () => {
         if (confirmed) {
             try {
                 await axios.delete(`http://localhost:8082/products/${id}/${itemId}`)
-                .then((response) => {
-                    console.log(response.data.message); // Should print "Product deleted successfully" if successful
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
+                    .then((response) => {
+                        console.log(response.data.message); // Should print "Product deleted successfully" if successful
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
             } catch (error) {
                 console.log('Error from Server', error);
             }
         }
     }
-
 
     const productList = (
         <table className="table-auto w-full ">
@@ -121,7 +135,41 @@ const MyProduct = () => {
                                 <div>
                                     {productList}
                                 </div>
+
+                                <div className="max-w-2xl mx-auto mt-8 p-4 bg-gray-100 shadow-md">
+                                    <h2 className="text-2xl font-bold mb-4">Consumer Orders</h2>
+                                    <table className="w-full border-collapse border border-gray-300">
+                                        <thead>
+                                            <tr className="bg-gray-200">
+                                                <th className="p-2 border border-gray-300">Consumer ID</th>
+                                                <th className="p-2 border border-gray-300">Payment ID</th>
+                                                <th className="p-2 border border-gray-300">Products</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {consumerOrders.map((order, index) => (
+                                                <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
+                                                    <td className="p-2 border border-gray-300">{order.consumer_id}</td>
+                                                    <td className="p-2 border border-gray-300">{order.payment_id}</td>
+                                                    <td className="p-2 border border-gray-300">
+                                                        <ul className="list-disc pl-4">
+                                                            {order.cart.map((item, itemIndex) => (
+                                                                <li key={itemIndex} className="mb-2">
+                                                                    <p className="text-gray-800">Product: {item.name}</p>
+                                                                    <p className="text-gray-700">Quantity: {item.quantity}</p>
+                                                                    <p className="text-gray-700">Price: ${item.price}</p>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
+
                         ) : (
                             ""
                         )}
@@ -132,4 +180,4 @@ const MyProduct = () => {
     );
 };
 
-export default MyProduct;
+export default SellingHub;

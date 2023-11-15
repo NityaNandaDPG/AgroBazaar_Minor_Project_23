@@ -13,27 +13,16 @@ function Header(){
             <img className="logo" src={logo} alt=''/>
             <a href='/'><AiFillHome/></a>
             <a href='#'>Today's Market</a>
-            {/* <a href='#'>Vegetables</a>
-            <a href='#'>Fruits</a>
-            <a href='#'>Foods</a> */}
-            {/* <form className='search-box'>
-                <input className="input" type="text" placeholder="Search for Vegetables, Farmers and more"/>
-                <button className="button" type='submit'><AiOutlineSearch /></button>
-            </form> */}
             <div className='menu'>
                 <a className='menu-button' href='#'>Account</a>
                 <div className='menu-content'>
                     {/* <a to="" href="#">Login</a> */}
                     <Link to="/login">Login</Link>
                     <Link to="/profile">My Profile</Link>
-                    <a href="#">My Order</a>
-                    {/* <Link to="/myproduct">My Products</Link> */}
-
-                    
+                    <Link to="/myorders">My Order</Link>
                 </div>
             </div>
             <a href="/myproduct">Selling Hub</a>
-            {/* <a href=''>Bag</a> */}
             <Link to="/basket"><AiOutlineShoppingCart/></Link>
             <a href='#'><BiChat/></a>
         </header>

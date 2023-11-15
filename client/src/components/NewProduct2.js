@@ -10,6 +10,7 @@ const NewProduct1 = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({
         id:"",
+        seller_id:id,
         name: "",
         category: "Fruit",
         image: "",

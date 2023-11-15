@@ -9,8 +9,6 @@ paypal.configure({
 
 const app = express.Router();
 
-// app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
-
 app.post('/pay', (req, res) => {
     const create_payment_json = {
         "intent": "sale",
@@ -18,7 +16,7 @@ app.post('/pay', (req, res) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3600/success",
+            "return_url": "http://localhost:3600/orders", // Change the redirect URL here
             "cancel_url": "http://localhost:3600/cancel"
         },
         "transactions": [{
@@ -80,4 +78,4 @@ app.post('/pay', (req, res) => {
 
 app.get('/cancel', (req, res) => res.send('Cancelled'));
 
-module.exports=app;
+module.exports = app;

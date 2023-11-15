@@ -167,9 +167,13 @@ const Basket = () => {
           </strong>
         </div>
       </div>
-      <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
+      {/* <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
         Checkout
-      </button>
+      </button> */}
+
+      <form action="http://localhost:8082/payment/pay" method="post">
+        <input type="submit" value="Oder Now" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded" />
+      </form>
     </div>
   );
 };

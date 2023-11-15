@@ -7,27 +7,27 @@ import axios from 'axios';
 import ProductCard from './ProductCard';
 
 const MyProfile = () => {
-  const userData=useSelector((state) => state.user);
-  const id= useSelector((state) => state.user._id);
+  const userData = useSelector((state) => state.user);
+  const id = useSelector((state) => state.user._id);
   const [vegs, setVegs] = useState([]);
   // const isLoggedIn=window.localStorage.getItem("token");
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     dispatch(logoutRedux());
     window.localStorage.setItem("token", false);
     window.localStorage.removeItem("token");
     alert("Logout Out Successfull");
   };
-  
+
   useEffect(() => {
   }, [userData._id, dispatch]);
 
-  const handleEditDetails = () => {};
+  const handleEditDetails = () => { };
   const navigate = useNavigate();
 
   return (
-    <Container>
+<Container>
       <Card>
         <CardHeader>
           <h1>My Profile</h1>
@@ -37,17 +37,17 @@ const MyProfile = () => {
             <p>Please log in to view your profile.</p>
           ) : (
             <>
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <img
-                  src={userData.avatar} // Assuming the image URL is stored in userData.image
+                  src={userData.avatar}
                   alt="Profile Picture"
-                  style={{ maxWidth: "200px", maxHeight: "200px" }}
+                  style={{ maxWidth: "200px", maxHeight: "200px", marginRight: "20px" }}
                 />
-              </div>
-              <div>
-                <p>Name: {userData.firstname} {userData.lastname}</p>
-                <p>Email: {userData.email}</p>
-                <p>Address: {userData.address}</p>
+                <div>
+                  <p>Name: {userData.firstname} {userData.lastname}</p>
+                  <p>Email: {userData.email}</p>
+                  <p>Address: {userData.address}</p>
+                </div>
               </div>
             </>
           )}
@@ -57,7 +57,7 @@ const MyProfile = () => {
       <Card>
         <CardBody>
           <div>
-            {userData.isAuthenticated? (
+            {userData.isAuthenticated && (
               <div
                 style={{
                   display: "flex",
@@ -69,18 +69,10 @@ const MyProfile = () => {
                   Logout
                 </Button>
 
-                <Button
-                  // onClick={() => navigate(`/update/${userData._id}`)}
-                  color="dark"
-                >
+                <Button onClick={() => navigate(`/update/${userData._id}`)} color="dark">
                   Edit Details
                 </Button>
-                <Button onClick={() => navigate("/form")} color="dark">
-                  Post A Product
-                </Button>
               </div>
-            ) : (
-              ""
             )}
           </div>
         </CardBody>

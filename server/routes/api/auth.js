@@ -104,6 +104,4 @@ auth.get("/getUser",  async (req, res) => {
   }
 });
 
-
-
 module.exports=auth;
