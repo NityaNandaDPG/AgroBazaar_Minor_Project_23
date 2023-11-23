@@ -32,7 +32,7 @@ const MyOrder = () => {
                                 <li key={itemIndex} className="mb-2">
                                     <p className="text-gray-800">Product: {item.name}</p>
                                     <p className="text-gray-700">Quantity: {item.quantity}</p>
-                                    <p className="text-gray-700">Price: ${item.price}</p>
+                                    <p className="text-gray-700">Price: Rs. {item.price}</p>
                                 </li>
                             ))}
                         </ul>

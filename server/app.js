@@ -9,6 +9,10 @@ const cart=require('./routes/api/cart');
 const payment=require('./routes/api/payment');
 const seller=require('./routes/api/seller');
 const order=require('./routes/api/order');
+const review=require('./routes/api/review');
+const fullname=require('./routes/api/fullname');
+
+
 
 const app=express();
 connectDB();
@@ -27,6 +31,8 @@ app.use('/add2cart', cart);
 app.use('/payment', payment);
 app.use('/seller', seller);
 app.use('/order', order);
+app.use('/review', review);
+app.use('/fullname', fullname);
 
 const port=process.env.PORT || 8082;
 app.listen(port,()=>console.log(`Server running on port ${port}`));
