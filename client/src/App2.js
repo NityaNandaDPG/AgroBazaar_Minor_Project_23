@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import  SignUp1 from './components/SignUp1';
 import MyProfile from './components/MyProfile';
+import MyProfile2 from './components/MyProfile2';
 // import MarketPrice from './components/MarketPrice';
 import Error from './components/Error';
 import ProductList from './components/ProductList';
@@ -25,12 +26,12 @@ function App2() {
   const router = createBrowserRouter(
     createRoutesFromElements(
             <Route exact path='/' element={<Home/>}>
-              {/* <Route index element={<MarketPrice/>}/> */}
               <Route index element={<ProductList/>}/>
               <Route path="admin" element={<AdminPanel/>}/>
               <Route path="login" element={<Login/>}/>
               <Route path="signup" element={<SignUp1/>}/>
-              <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>}/>
+              {/* <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>}/> */}
+              <Route path="profile" element={<ProtectedRoute><MyProfile2 /></ProtectedRoute>}/>
               <Route path="form" element={<ProtectedRoute><NewProduct2/></ProtectedRoute>}/>
               <Route path="preview/:productId" element={<ProductPreview/>}/>
               <Route path="myproduct" element={<ProtectedRoute><SellingHub /></ProtectedRoute>}/>

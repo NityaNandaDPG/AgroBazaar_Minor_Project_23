@@ -42,56 +42,6 @@ const UserSchema = new mongoose.Schema({
     required: false
   },
 
-  type: {
-    type: String,
-    enum: ['Consumer', 'Farmer'],
-    required: true
-  },
-
-  // seller_details: {
-  //   name: {
-  //     type: String,
-  //     required: false
-  //   },
-  //   products: [
-  //     {
-  //       id: {
-  //         type: String,
-  //         required: false,
-  //       },
-  //       name: {
-  //         type: String,
-  //         required:false,
-  //       },
-  //       category: {
-  //         type: String,
-  //         default: 'Fruit',
-  //       },
-  //       image: {
-  //         type: String,
-  //         required: false,
-  //       },
-  //       price: {
-  //         type: Number,
-  //         required: false,
-  //       },
-  //       description: {
-  //         type: String,
-  //         required: false,
-  //       },
-  //     },
-
-  //   ],
-
-  //   reviews: [{
-  //     id:{
-  //       type: String,
-  //       required: false
-  //     }
-
-  //   }],
-  // },
-
   address: {
     street: {
       type: String,
@@ -132,7 +82,7 @@ const UserSchema = new mongoose.Schema({
       },
       category: {
         type: String,
-        default: 'Fruit',
+        // default: 'Fruit',
       },
       image: {
         type: String,

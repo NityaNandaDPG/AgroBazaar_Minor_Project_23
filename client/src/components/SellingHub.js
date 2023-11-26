@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, CardBody, CardHeader, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
-import { Navigate, useNavigate, Route, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
 const SellingHub = () => {
@@ -60,6 +59,9 @@ const SellingHub = () => {
 
     const productList = (
         <table className="table-auto w-full ">
+            <caption className="bg-gray-800 text-white py-4 text-xl font-semibold text-center">
+                My Products
+            </caption>
             <thead>
                 <tr>
                     <th className="px-4 py-2">Image</th>
@@ -106,7 +108,6 @@ const SellingHub = () => {
                 )}
             </tbody>
         </table>
-
     );
 
     const handleLogout = () => {
@@ -120,63 +121,56 @@ const SellingHub = () => {
     const navigate = useNavigate();
 
     return (
-        <Container>
-            <Card>
-                <CardBody>
-                    <div>
-                        {userData.isAuthenticated ? (
-                            <div>
-                                <Button onClick={() => navigate("/form")} color="dark">
-                                    Post A Product
-                                </Button>
-                                <h3 className="bg-gray-800 text-white py-4 text-xl font-semibold text-center">
-                                    My Products
-                                </h3>
-                                <div>
-                                    {productList}
-                                </div>
+        <div className="mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+            {userData.isAuthenticated ? (
+                <div>
+                    <button
+                        onClick={() => navigate("/form")}
+                        className="bg-blue-500 text-white hover:bg-blue-700 font-bold py-2 px-4 rounded mb-4 md:mb-0"
+                    >
+                        Post A Product
+                    </button>
 
-                                <div className="max-w-2xl mx-auto mt-8 p-4 bg-gray-100 shadow-md">
-                                    <h2 className="text-2xl font-bold mb-4">Consumer Orders</h2>
-                                    <table className="w-full border-collapse border border-gray-300">
-                                        <thead>
-                                            <tr className="bg-gray-200">
-                                                <th className="p-2 border border-gray-300">Consumer ID</th>
-                                                <th className="p-2 border border-gray-300">Payment ID</th>
-                                                <th className="p-2 border border-gray-300">Products</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {consumerOrders.map((order, index) => (
-                                                <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
-                                                    <td className="p-2 border border-gray-300">{order.consumer_id}</td>
-                                                    <td className="p-2 border border-gray-300">{order.payment_id}</td>
-                                                    <td className="p-2 border border-gray-300">
-                                                        <ul className="list-disc pl-4">
-                                                            {order.cart.map((item, itemIndex) => (
-                                                                <li key={itemIndex} className="mb-2">
-                                                                    <p className="text-gray-800">Product: {item.name}</p>
-                                                                    <p className="text-gray-700">Quantity: {item.quantity}</p>
-                                                                    <p className="text-gray-700">Price: ${item.price}</p>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-
-                        ) : (
-                            ""
-                        )}
+                    <div className="mb-8">
+                        {productList}
                     </div>
-                </CardBody>
-            </Card>
-        </Container>
+
+                    <div className="mb-8">
+                        <table className="table-auto w-full">
+                            <caption className="bg-gray-800 text-white py-4 text-xl font-semibold text-center">Consumer Orders</caption>
+                            <thead>
+                                <tr>
+                                    <th className="px-4 py-2">Consumer ID</th>
+                                    <th className="px-4 py-2">Payment ID</th>
+                                    <th className="px-4 py-2">Products</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {consumerOrders.map((order, index) => (
+                                    <tr className={index % 2 === 0 ? "bg-gray-100" : "bg-white"} key={index}>
+                                        <td className="px-4 py-2">{order.consumer_id}</td>
+                                        <td className="px-4 py-2">{order.payment_id}</td>
+                                        <td className="px-4 py-2">
+                                            <ul className="list-disc pl-4">
+                                                {order.cart.map((item, itemIndex) => (
+                                                    <li className="mb-2" key={itemIndex}>
+                                                        <p className="text-gray-800">Product: {item.name}</p>
+                                                        <p className="text-gray-700">Quantity: {item.quantity}</p>
+                                                        <p className="text-gray-700">Price: ${item.price}</p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
+        </div>
     );
 };
 

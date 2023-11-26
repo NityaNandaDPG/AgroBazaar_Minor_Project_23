@@ -6,9 +6,8 @@ import ProductCard from './ProductCard';
 
 function ProductList() {
   const user = useSelector((state) => state.user);
-  // const id = useSelector((state) => state.user._id);
-  const id=user._id;  
-  const isAuthenticated=user.isAuthenticated;
+  const id = user._id;
+  const isAuthenticated = user.isAuthenticated;
 
   const [vegs, setVegs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,8 +20,7 @@ function ProductList() {
       try {
         const response = await axios.get('http://localhost:8082/products/all');
         setVegs(response.data);
-        
-        setLoading(false); // Set loading to false when data is loaded
+        setLoading(false);
       } catch (error) {
         console.error('Error from Server:', error);
       }
@@ -31,7 +29,7 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const addToCart = (productId,seller_id, p_name, price) => {
+  const addToCart = (productId, seller_id, p_name, price) => {
     return axios.put(`http://localhost:8082/add2cart/${id}`, {
       productId,
       seller_id,
@@ -85,7 +83,7 @@ function ProductList() {
       'No matching products found.'
     ) : (
       vegs.map((item, k) => (
-        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.seller_id,item.name, item.price)} />
+        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.seller_id, item.name, item.price)} />
       ))
     );
 
@@ -125,6 +123,8 @@ function ProductList() {
             <select value={categoryFilter} onChange={handleCategoryChange} className="w-full h-10 border rounded mr-4">
               <option value="">All Categories</option>
               <option value="Fruit">Fruit</option>
+              <option value="Vegetable">Vegetable</option>
+              <option value="Home Made">Home Made</option>
             </select>
             <input
               type="number"
@@ -144,7 +144,6 @@ function ProductList() {
         {productList}
       </div>
     </div>
-
   );
 }
 export default ProductList;
