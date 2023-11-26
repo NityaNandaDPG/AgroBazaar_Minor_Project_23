@@ -153,12 +153,12 @@ const ProductPreview = () => {
 
             <div className="md:w-1/2 md:ml-4">
                 <div className="max-w-md mx-auto bg-white shadow-md overflow-hidden">
-                    <h1 className="text-2xl font-bold p-4 border-b">Seller Reviews:</h1>
+                    <h1 className="text-2xl font-bold p-4 border-b">Customer Reviews:</h1>
                     {sellerReviews.map((user, i) => (
                         <div key={i} className="p-4 border-b">
                             <div>
                                 <h3 className="text-lg font-bold mb-2">User: {user.firstname}</h3>
-                                <p className="mb-2">Comment: {user.review_post[0].comment}</p>
+                                  
                             </div>
                             <div className="flex items-center">
                                 <p className="mr-2">Rating: </p>
@@ -168,6 +168,7 @@ const ProductPreview = () => {
                                     ))}
                                 </div>
                             </div>
+                            <p className="mb-2">Comment: {user.review_post[0].comment}</p>
                         </div>
                     ))}
                 </div>

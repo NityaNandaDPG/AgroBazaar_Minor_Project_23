@@ -196,8 +196,12 @@ const UserSchema = new mongoose.Schema({
 
   review_post: [
     {
-      post: {
+      comment: {
         type: String,
+        required: false
+      },
+      rating: {
+        type: Number,
         required: false
       }
     }

@@ -23,7 +23,7 @@ const Signup = () => {
             pin: "",
         },
     });
-
+    const genders=["Male","Female","Others"]
     const statesOfIndia = [
         'Andaman and Nicobar Islands',
         'Andhra Pradesh',
@@ -427,15 +427,14 @@ const Signup = () => {
                                         id="gender"
                                         name="gender"
                                         autoComplete="off"
-                                        value={data.gender}
                                         required
                                         onChange={(e) => handleChange(e, "gender")}
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                     >
                                         <option disabled selected>Select a choice</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Others">Others</option>
+                                        {genders.map((gender, index) => (
+                                            <option value={gender} key={index}>{gender}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>

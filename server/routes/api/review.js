@@ -16,6 +16,8 @@ app.post('/sellerrating/:userId', async (req, res) => {
         if (existingReview) {
             return res.status(400).json({ error: 'You can only review a seller once.' });
         }
+        console.log("server: ",comment)
+        console.log("server: ",rating)
 
         const review = {
             _id: sellerId,
@@ -34,7 +36,6 @@ app.post('/sellerrating/:userId', async (req, res) => {
 
 app.get('/sellerrating/:sellerId', async (req, res) => {
     const sellerId = req.params.sellerId;
-    console.log("REviews: ", sellerId)
     try {
         const targetId = sellerId;
         const users = await User.find({ 'review_post._id': targetId });
