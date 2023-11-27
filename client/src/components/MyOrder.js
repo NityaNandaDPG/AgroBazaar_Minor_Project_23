@@ -1,6 +1,6 @@
-// src/components/UserOrders.js
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom'; 
+import { useSelector } from "react-redux";
 import axios from 'axios';
 
 const MyOrder = () => {
@@ -22,7 +22,7 @@ const MyOrder = () => {
 
     return (
         <div className="max-w-2xl mx-auto mt-8 p-4 bg-gray-100 shadow-md">
-            <h2 className="text-2xl font-bold mb-4">User Orders</h2>
+            <h2 className="text-2xl font-bold mb-4">My Orders:</h2>
             <ul>
                 {orders.map((order, index) => (
                     <li key={index} className="mb-8 border-b pb-4">
@@ -30,7 +30,7 @@ const MyOrder = () => {
                         <ul className="list-disc pl-4">
                             {order.cart.map((item, itemIndex) => (
                                 <li key={itemIndex} className="mb-2">
-                                    <p className="text-gray-800">Product: {item.name}</p>
+                                    <Link to={`/preview/${item._id}`} ><p className="text-gray-800">Product: {item.name}</p></Link>
                                     <p className="text-gray-700">Quantity: {item.quantity}</p>
                                     <p className="text-gray-700">Price: Rs. {item.price}</p>
                                 </li>

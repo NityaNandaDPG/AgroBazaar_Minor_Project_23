@@ -9,7 +9,9 @@ paypal.configure({
 
 const app = express.Router();
 
-app.post('/pay', (req, res) => {
+app.post('/pay/:price', (req, res) => {
+    const price = req.params.price;
+
     const create_payment_json = {
         "intent": "sale",
         "payer": {
@@ -24,7 +26,7 @@ app.post('/pay', (req, res) => {
                 "items": [{
                     "name": "Red Sox Hat",
                     "sku": "001",
-                    "price": "25.00",
+                    "price": price,
                     "currency": "USD",
                     "quantity": 1
                 }]

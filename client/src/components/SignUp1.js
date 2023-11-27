@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const navigate = useNavigate();
+    const [strength, setStrength] = useState('weak');
     const [data, setData] = useState({
         username: "",
         firstname: "",
@@ -72,7 +73,16 @@ const Signup = () => {
         }
     };
 
-    const [strength, setStrength] = useState('weak');
+    function formatDate(date) {
+        // Ensure date is not undefined or null
+        if (!date) {
+            return '';
+        }
+    
+        // Convert the date to "yyyy-MM-dd" format
+        const formattedDate = new Date(date).toISOString().split('T')[0];
+        return formattedDate;
+    }
 
     const handleChange = (event, property) => {
         if (property === "address") {
@@ -90,9 +100,14 @@ const Signup = () => {
             setStrength(passwordStrength);
             setData({ ...data, [property]: event.target.value });
         }
+        else if (property === "dob") {
+            const formattedDate = formatDate(event.target.value);
+            
+            setData({ ...data, [property]: formattedDate });
+        }
         else {
             setData({ ...data, [property]: event.target.value });
-        }
+        } 
         console.log(event.target.value)
     };
 
@@ -456,6 +471,7 @@ const Signup = () => {
                                         onChange={(e) => handleChange(e, "dob")}
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         max={getTodayDate()}
+                                    
                                     />
                                 </div>
                             </div>

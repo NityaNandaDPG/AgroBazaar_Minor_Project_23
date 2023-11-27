@@ -27,7 +27,7 @@ cart.get('/:id', async (req, res) => {
 
 
 cart.put('/:id', async (req, res) => {
-    const { productId,seller_id, p_name, price } = req.body;
+    const { productId,seller_id, p_name,p_image, price } = req.body;
 
     const userId = req.params.id;
 
@@ -48,7 +48,7 @@ cart.put('/:id', async (req, res) => {
             return res.status(200).json({ status: "ok", message: 'Product is already exists in Cart' });
         }
 
-        user.cart.push({ _id: productId, seller_id: seller_id, name: p_name, quantity: 1, price: price });
+        user.cart.push({ _id: productId, seller_id: seller_id, name: p_name,image: p_image, quantity: 1, price: price });
         await user.save();
         console.log("Product is added to cart successfully.");
         res.status(200).json({ status: "ok", message: 'Product is added to cart successfully' });

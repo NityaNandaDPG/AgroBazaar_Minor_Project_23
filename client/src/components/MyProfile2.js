@@ -255,7 +255,7 @@ const MyProfile2 = () => {
 
     return (
         <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-            <h2 className="text-center text-xl font-semibold text-gray-800 mb-4">Edit Your Profile:</h2>
+            <h2 className="text-center text-xl font-semibold text-gray-800 mb-4">My Profile:</h2>
             <form>
                 <div className="flex justify-end">
                     {!isEditMode ? (

@@ -48,7 +48,11 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
                     {
                         $push: {
                             'consumer_orders': {
-                                cart: req.body,
+                                // cart: req.body,
+                                $each: req.body.filter(product => product.seller_id === sellerId)
+                                .map(product => ({
+                                    cart: product,
+                                })),
                                 payment_id: paymentId,
                                 consumer_id: userId // Optionally, you may want to store the buyer's ID for reference
                             }

@@ -29,12 +29,13 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const addToCart = async (productId, seller_id, p_name, price) => {
+  const addToCart = async (productId, seller_id, p_name,p_image, price) => {
     try {
       const response = await axios.put(`http://localhost:8082/add2cart/${id}`, {
         productId,
         seller_id,
         p_name,
+        p_image,
         price,
       });
       console.log(response.data.message);
@@ -86,7 +87,7 @@ function ProductList() {
       'No matching products found.'
     ) : (
       vegs.map((item, k) => (
-        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.seller_id, item.name, item.price)} />
+        <ProductCard key={k} product={item} addToCart={() => addToCart(item._id, item.seller_id, item.name,item.image, item.price)} />
       ))
     );
 

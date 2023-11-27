@@ -15,6 +15,8 @@ import SellingHub from './components/SellingHub';
 import UpdateProduct from './components/UpdateProduct'; 
 // import UpdateProduct2 from './components/UpdateProduct2'; 
 import Basket from './components/Basket';
+import Basket2 from './components/Basket2';
+import DeliveryClaimPage from "./components/DeliveryClaimPage";
 import PaymentOrder from './components/PaymentOrder';
 import MyOrder from './components/MyOrder';
 import PaymentSuccess from './components/PaymentSuccess';
@@ -38,7 +40,10 @@ function App2() {
               <Route path="orders" element={<ProtectedRoute><PaymentOrder/></ProtectedRoute>}/>
               <Route path="updateproduct/:productId" element={<ProtectedRoute><UpdateProduct/></ProtectedRoute>}/>
               {/* <Route path="updateproduct2/:productId" element={<ProtectedRoute><UpdateProduct2/></ProtectedRoute>}/> */}
-              <Route path="basket" element={<ProtectedRoute><Basket/></ProtectedRoute>}/>
+              {/* <Route path="basket" element={<ProtectedRoute><Basket/></ProtectedRoute>}/> */}
+              <Route path="basket" element={<ProtectedRoute><Basket2/></ProtectedRoute>}/>
+              <Route path="/DeliveryClaimPage/free/:totalWithGST" element={<DeliveryClaimPage claimType="free" />} />
+              <Route path="/DeliveryClaimPage/paid/:totalWithGST" element={<DeliveryClaimPage claimType="paid" />} />
               <Route path="myorders" element={<ProtectedRoute><MyOrder/></ProtectedRoute>}/>
               <Route path="*" element={<Error/>}/>
               <Route path="temp" element={<Temp />}/>

@@ -104,6 +104,11 @@ const Basket = () => {
           {cart.map((item, i) => (
             <li key={i} className="border-b border-gray-300 py-2">
               <div className="flex items-center justify-between">
+              <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-12 h-12 object-cover"
+                                />
                 <div className="w-2/5">
                   <span>
                     {productDetails[item._id]?.name || "Product Name Not Found"}
@@ -158,7 +163,7 @@ const Basket = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>  
         <div className="mt-4">
           <strong>Subtotal: ₹{totalPrice.toFixed(2)}</strong>
           <p>GST (12%): ₹{gst.toFixed(2)}</p>

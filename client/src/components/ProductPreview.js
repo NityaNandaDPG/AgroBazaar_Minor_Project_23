@@ -85,20 +85,21 @@ const ProductPreview = () => {
     };
 
 
-    const addToCart = (productId, p_name, price) => {
-        return axios.put(`http://localhost:8082/add2cart/${id}`, {
-            productId,
-            p_name,
-            price,
-        })
-            .then(response => {
-                console.log('Successfully added to cart:', response.data);
-                alert('Successfully added to cart:', response.data);
-            })
-            .catch(error => {
-                console.error('Error adding to cart:', error);
-                alert("Failed to add to Cart");
+    const addToCart = async (productId, seller_id, p_name,p_image, price) => {
+        try {
+            const response = await axios.put(`http://localhost:8082/add2cart/${id}`, {
+                productId,
+                seller_id,
+                p_name,
+                p_image,
+                price,
             });
+            console.log('Successfully added to cart:', response.data);
+            alert('Successfully added to cart:', response.data);
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert("Failed to add to Cart");
+        }
     };
 
     const handleRatingChange = (newRating) => {
@@ -136,7 +137,7 @@ const ProductPreview = () => {
                 <h1 className="text-3xl font-bold mb-2">{data.name}</h1>
                 <p className="text-gray-600 mb-4">Price: ₹{data.price}</p>
                 <button
-                    onClick={() => addToCart(data.id, data.name, data.price)}
+                    onClick={() => addToCart(data.id,data.seller_id, data.name, data.image,data.price)}
                     className="px-3 py-2 text-white rounded focus:outline-none bg-green-600 hover:bg-green-700 transition duration-300"
                 >
                     Add to Cart

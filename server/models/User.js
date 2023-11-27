@@ -107,6 +107,9 @@ const UserSchema = new mongoose.Schema({
       name: {
         type: String,
       },
+      image: {
+        type: String,
+      },
       quantity: {
         type: Number,
         default: 1

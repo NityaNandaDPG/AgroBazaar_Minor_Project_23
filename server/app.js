@@ -11,6 +11,7 @@ const seller=require('./routes/api/seller');
 const order=require('./routes/api/order');
 const review=require('./routes/api/review');
 const fullname=require('./routes/api/fullname');
+const address=require('./routes/api/address');
 
 
 
@@ -33,6 +34,7 @@ app.use('/seller', seller);
 app.use('/order', order);
 app.use('/review', review);
 app.use('/fullname', fullname);
+app.use('/address', address);
 
 const port=process.env.PORT || 8082;
 app.listen(port,()=>console.log(`Server running on port ${port}`));

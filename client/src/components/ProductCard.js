@@ -5,7 +5,7 @@ import './ProductCard.css';
 const ProductCard = ({ product, addToCart }) => {
   const handleAddToCart = () => {
     console.log("Seller id:" + product.seller_id);
-    addToCart(product._id, product.seller_id, product.name, product.price);
+    addToCart(product._id, product.seller_id, product.name,product.image, product.price);
   };
 
   return (
