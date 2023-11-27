@@ -109,23 +109,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
-// router.put("/:id", (req, res) => {
-//   Product.findByIdAndUpdate(req.params.id, req.body)
-//     .then((product) => res.json({ msg: "Updated successfully" }))
-//     .catch((err) =>
-//       res.status(400).json({ error: "Unable to update the Database" })
-//     );
-// });
-
-
-// router.delete("/:id", (req, res) => {
-//   Product.findByIdAndRemove(req.params.id, req.body)
-//     .then((book) => res.json({ mgs: "Vegetable entry deleted successfully" }))
-//     .catch((err) => res.status(404).json({ error: "No such a Vegetable" }));
-// });
-
-
 router.delete('/:userId/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -156,8 +139,6 @@ router.delete('/:userId/:productId', async (req, res) => {
 
 
 
-
-
 // router.get('/all', async (req, res) => {
 //   try {
 //     const { name, category, maxPrice } = req.query;
@@ -166,22 +147,23 @@ router.delete('/:userId/:productId', async (req, res) => {
 //     console.log(maxPrice)
 //     let filter = {};
 
-    // if (name) {
-    //   filter.name = name;
-    // }
-    // if (category) {
-    //   filter.category = category;
-    // }
-    // if (maxPrice) {
-    //   filter.price = { $lte: parseFloat(maxPrice) };
-    // }
-    // filter._id = { $ne: null }; 
+//     if (name) {
+//       filter.name = name;
+//     }
+//     if (category) {
+//       filter.category = category;
+//     }
+//     if (maxPrice) {
+//       filter.price = { $lte: parseFloat(maxPrice) };
+//     }
+//     filter._id = { $ne: null }; 
 
 //     const users = await User.find(filter, 'products');
 //     const allProducts = users.reduce((acc, user) => acc.concat(user.products), []);
 //     res.json(allProducts);
 //   }
 //   catch (error) {
+//     console.error('Error filtering products:', error);
 //     res.status(500).json({ error: 'Internal server error' });
 //   }
 // });

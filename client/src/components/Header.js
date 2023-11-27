@@ -24,8 +24,11 @@ function Header(){
     return(
         <header className="header ">
             <img className="logo" src={logo} alt=''/>
-            <a href='/'><AiFillHome/></a>
+            <a href='/'>Home</a>
             {/* <a href='#'>Today's Market</a> */}
+
+            <a href="/myproduct">Selling Hub</a>
+            <Link to="/basket">Basket</Link>
             <div className='menu'>
                 <a className='menu-button' href='#'>Account</a>
                 {isAuthenticated?(
@@ -46,9 +49,7 @@ function Header(){
                 </div>
                 )}
             </div>
-            <a href="/myproduct">Selling Hub</a>
-            <Link to="/basket"><AiOutlineShoppingCart/></Link>
-            <a href='#'><BiChat/></a>
+            {/* <a href='#'><BiChat/></a> */}
         </header>
     );
 }

@@ -29,33 +29,36 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const addToCart = (productId, seller_id, p_name, price) => {
-    return axios.put(`http://localhost:8082/add2cart/${id}`, {
-      productId,
-      seller_id,
-      p_name,
-      price,
-    })
-      .then(response => {
-        console.log(response.data.message);
-        alert(response.data.message);
-      })
-      .catch(error => {
-        console.error('Error adding to cart:', error);
-        alert("Failed to add to Cart");
+  const addToCart = async (productId, seller_id, p_name, price) => {
+    try {
+      const response = await axios.put(`http://localhost:8082/add2cart/${id}`, {
+        productId,
+        seller_id,
+        p_name,
+        price,
       });
+      console.log(response.data.message);
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert("Failed to add to Cart");
+    }
   };
 
   const handleSearchChange = (e) => {
+
     setSearchTerm(e.target.value);
+    console.log(searchTerm);
   };
 
   const handleCategoryChange = (e) => {
     setCategoryFilter(e.target.value);
+    console.log(categoryFilter);
   };
 
   const handlePriceChange = (e) => {
     setPriceFilter(e.target.value);
+    console.log(priceFilter);
   };
 
   //client
@@ -88,56 +91,32 @@ function ProductList() {
     );
 
   return (
-    <div>
-      <div className="flex grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-        <div className="flex-grow  ">
-          <div className="flex space-x-0">
-            <button className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold">
-              Vegetables
-            </button>
-
-            <button className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold">
-              Fruits
-            </button>
-
-            <button className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold">
-              Flowers
-            </button>
-
-            <button className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold">
-              Home Made
-            </button>
-          </div>
-        </div>
-
-        <div className="form-container flex">
-          <form onSubmit={handleFilterSubmit} className="w-full flex">
-            <input
-              type="text"
-              placeholder="Search by product name"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="w-full h-10 border rounded mr-4"
-            />
-
-            <select value={categoryFilter} onChange={handleCategoryChange} className="w-full h-10 border rounded mr-4">
-              <option value="">All Categories</option>
-              <option value="Fruit">Fruit</option>
-              <option value="Vegetable">Vegetable</option>
-              <option value="Home Made">Home Made</option>
-            </select>
-            <input
-              type="number"
-              placeholder="Max Price"
-              value={priceFilter}
-              onChange={handlePriceChange}
-              className="w-full h-10 border rounded mr-4"
-            />
-            <button type="submit" className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded">
-              Search
-            </button>
-          </form>
-        </div>
+    <div className=" mx-auto mt-8  bg-white shadow-md rounded-md">
+      <div className="form-container flex">
+        <form onSubmit={handleFilterSubmit} className="w-full flex">
+          <input
+            type="text"
+            placeholder="Search by product name"
+            onChange={handleSearchChange}
+            className="w-full h-10 border rounded mr-4"
+          />
+          <select value={categoryFilter} onChange={handleCategoryChange} className="w-full h-10 border rounded mr-4">
+            <option disabled>All Categories</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Vegetable">Vegetable</option>
+            <option value="Home Made">Home Made</option>
+          </select>
+          <input
+            type="number"
+            placeholder="Max Price"
+            value={priceFilter}
+            onChange={handlePriceChange}
+            className="w-full h-10 border rounded mr-4"
+          />
+          <button type="submit" className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded">
+            Search
+          </button>
+        </form>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

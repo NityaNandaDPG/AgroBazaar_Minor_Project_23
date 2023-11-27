@@ -225,7 +225,7 @@ const Signup = () => {
 
     return (
         <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Add a New Product</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">New User:</h2>
             <form onSubmit={submitForm}>
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12 bg-yellow-200 rounded-lg p-6">

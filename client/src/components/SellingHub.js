@@ -140,7 +140,7 @@ const SellingHub = () => {
                             <caption className="bg-gray-800 text-white py-4 text-xl font-semibold text-center">Consumer Orders</caption>
                             <thead>
                                 <tr>
-                                    <th className="px-4 py-2">Consumer ID</th>
+                                    <th className="px-4 py-2">Consumer</th>
                                     <th className="px-4 py-2">Payment ID</th>
                                     <th className="px-4 py-2">Products</th>
                                 </tr>
@@ -156,7 +156,7 @@ const SellingHub = () => {
                                                     <li className="mb-2" key={itemIndex}>
                                                         <p className="text-gray-800">Product: {item.name}</p>
                                                         <p className="text-gray-700">Quantity: {item.quantity}</p>
-                                                        <p className="text-gray-700">Price: ${item.price}</p>
+                                                        <p className="text-gray-700">Price: ₹{item.price}</p>
                                                     </li>
                                                 ))}
                                             </ul>

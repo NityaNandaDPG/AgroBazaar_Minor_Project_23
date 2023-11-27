@@ -97,7 +97,7 @@ const Basket = () => {
   }
 
   return (
-    <div>
+    <div className="mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
       <div className="bg-white rounded p-4 shadow-md">
         <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
         <ul>

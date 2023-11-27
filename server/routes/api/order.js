@@ -7,6 +7,13 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
     const paymentId = req.params.paymentId;
 
     try {
+        const existingUser = await User.findOne({ _id: userId, 'orders.payment_id': paymentId });
+        if (existingUser) {
+            console.error('Duplicate payment ID for user');
+            res.status(400).json({ error: 'Duplicate payment ID for user' });
+            return;
+        }
+
         const updatedUser = await User.findByIdAndUpdate(
             userId,
             {
@@ -27,6 +34,15 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
             const seller = await User.findById(sellerId);
 
             if (seller) {
+
+                const existingSeller = await User.findOne({ _id: sellerId, 'consumer_orders.payment_id': paymentId });
+                if (existingSeller) {
+                    console.error('Duplicate payment ID for seller');
+                    res.status(400).json({ error: 'Duplicate payment ID for seller' });
+                    return;
+                }
+
+
                 const updatedSeller = await User.findByIdAndUpdate(
                     sellerId,
                     {

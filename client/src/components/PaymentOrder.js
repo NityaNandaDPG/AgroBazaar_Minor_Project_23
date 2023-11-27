@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import tick from './resources/sign-check.svg';
+
 
 const PaymentOrder = () => {
     const id = useSelector((state) => state.user._id);
@@ -46,7 +48,7 @@ const PaymentOrder = () => {
             return;
         }
 
-        axios.put(`http://localhost:8082/order/new/${id}/${paymentData.paymentId}`,cart)
+        axios.put(`http://localhost:8082/order/new/${id}/${paymentData.paymentId}`, cart)
             .then((res) => {
                 //content
             })
@@ -57,9 +59,19 @@ const PaymentOrder = () => {
     }, [id, paymentData.paymentId, cart]);
 
     return (
-        <div>
-            <h3>Order Placed</h3>
-            <h4>Payment Id: {paymentData.paymentId}</h4>
+        <div className="mx-auto mt-8 p-6 bg-white shadow-md rounded-md sm:w-96 md:w-96 lg:w-96 xl:w-96">
+            <div className="flex items-center justify-center mb-8">
+                <img
+                    src={tick}
+                    alt="Done Logo"
+                    className="w-20 h-20"
+                />
+            </div>
+
+            <div className="bg-gray-400 text-white p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4">Order Placed</h3>
+                <h4 className="text-lg">Payment Id: {paymentData.paymentId}</h4>
+            </div>
         </div>
     );
 };

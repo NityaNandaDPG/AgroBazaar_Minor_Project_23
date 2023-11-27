@@ -137,7 +137,7 @@ const ProductPreview = () => {
                 <p className="text-gray-600 mb-4">Price: ₹{data.price}</p>
                 <button
                     onClick={() => addToCart(data.id, data.name, data.price)}
-                    className="btn-primary"
+                    className="px-3 py-2 text-white rounded focus:outline-none bg-green-600 hover:bg-green-700 transition duration-300"
                 >
                     Add to Cart
                 </button>

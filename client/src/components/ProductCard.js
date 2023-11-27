@@ -21,6 +21,7 @@ const ProductCard = ({ product, addToCart }) => {
         </div>
         <div className="flex items-center justify-between mt-4">
           <div className="text-2xl font-bold text-black">₹{product.price}</div>
+
           <button
             onClick={handleAddToCart}
             className="px-3 py-2 text-white rounded focus:outline-none bg-green-600 hover:bg-green-700 transition duration-300"

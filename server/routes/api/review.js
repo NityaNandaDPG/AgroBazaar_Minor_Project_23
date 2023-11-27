@@ -45,8 +45,6 @@ app.get('/sellerrating/:sellerId', async (req, res) => {
             review_post: user.review_post.find(post => post._id.equals(targetId)),
         }));
 
-        // const users = await User.find();
-
         res.json(users);
     }
 
