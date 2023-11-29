@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User.js");
 
-
 router.put("/new/:id", async (req, res) => {
   const newProduct = req.body;
 
@@ -65,37 +64,6 @@ router.get("/all", async (req, res) => {
   }
 });
 
-// router.get("/all/:name/:category/:maxPrice", async (req, res) => {
-//   try {
-//     const { name, category, maxPrice } = req.params;
-//     console.log("Search Value:",name,category,maxPrice)
-
-//     let usersQuery = {};
-//     const users = await User.find(usersQuery, "products");
-//     const allProducts = users.reduce(
-//       (acc, user) => acc.concat(user.products),
-//       []
-//     );
-
-//     if (name != undefined && name !== '') {
-//       filteredProducts = allProducts.filter(product => product.name.includes(name));
-//     }
-
-//     if (category !== undefined && category !== '') {
-//       filteredProducts = allProducts.filter(product => product.category === category);
-//     }
-
-//     if (maxPrice !== undefined && maxPrice !== '') {
-//       filteredProducts = allProducts.filter(product => product.price <= parseFloat(maxPrice));
-//     }
-
-//     res.json(filteredProducts);
-//   } catch (error) {
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
-
 router.get("/all/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -120,7 +88,6 @@ router.get("/all/:productId", async (req, res) => {
   }
 });
 
-
 router.get("/:id", async (req, res) => {
   try {
     const userId = req.params.id;
@@ -142,7 +109,6 @@ router.delete('/:userId/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const productId = req.params.productId;
-
     const user = await User.findById(userId);
 
     if (!user) {
@@ -156,11 +122,10 @@ router.delete('/:userId/:productId', async (req, res) => {
     }
 
     user.products.splice(productIndex, 1);
-
     await user.save();
-
     res.json({ message: 'Product deleted successfully' });
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }

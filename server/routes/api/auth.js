@@ -3,13 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 const User = require('../../models/User.js');
-
 const auth = express.Router();
 auth.use(bodyParser.json());
 auth.use(cors());
-
 const JWT_SECRET = "jbdfbhbffashjbbf*&kmagra[]{vsdfas}knmasja";
 
 auth.post("/signup", async (req, res) => {
@@ -109,11 +106,9 @@ auth.get("/getUser/:email", async (req, res) => {
 
 auth.put('/updateUser/:email', async (req, res) => {
   try {
-    
     const email = req.params.email;
     const updatedUser = req.body;
-    console.log("ok:",email)
-
+    console.log("ok:", email)
     const result = await User.findOneAndUpdate({ email }, updatedUser, {
       new: true,
     });
@@ -121,10 +116,12 @@ auth.put('/updateUser/:email', async (req, res) => {
     if (result) {
       console.log("owo:")
       res.json(result);
-    } else {
+    }
+    else {
       res.status(404).json({ message: 'User not found' });
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }

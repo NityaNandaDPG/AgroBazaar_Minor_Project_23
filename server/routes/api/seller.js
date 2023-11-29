@@ -2,19 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const User = require("../../models/User.js");
-
 const app = express.Router();
-
 app.use(cors());
 app.use(bodyParser.json());
-
 
 // API endpoint to create or update seller information
 app.post('/create-seller-info', async (req, res) => {
     const { id, name } = req.body;
 
     console.log("Received request. ID:", id, "New Seller Name:", name);
-
     try {
         const updatedUser = await User.findByIdAndUpdate(
             id,
@@ -39,21 +35,17 @@ app.post('/create-seller-info', async (req, res) => {
     }
 });
 
-
 app.get('/seller-info/:Id', (req, res) => {
     const userId = req.params.Id;
-
     User.findById(userId)
         .then((user) => {
             if (!user || !user.seller_details) {
                 return res.status(404).json({ error: 'Seller information not found for the current user.' });
             }
-
             const sellerInfo = {
                 name: user.seller_details.name,
                 products: user.seller_details.products,
             };
-
             res.json(sellerInfo);
         })
         .catch((error) => {
@@ -62,9 +54,7 @@ app.get('/seller-info/:Id', (req, res) => {
         });
 });
 
-
 // Add this API endpoint to your existing server code
-
 app.post('/add-product/:id', async (req, res) => {
     const userId = req.params.id;
     const { product } = req.body;

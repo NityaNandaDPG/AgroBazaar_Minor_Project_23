@@ -16,8 +16,8 @@ app.post('/sellerrating/:userId', async (req, res) => {
         if (existingReview) {
             return res.status(400).json({ error: 'You can only review a seller once.' });
         }
-        console.log("server: ",comment)
-        console.log("server: ",rating)
+        console.log("server: ", comment)
+        console.log("server: ", rating)
 
         const review = {
             _id: sellerId,

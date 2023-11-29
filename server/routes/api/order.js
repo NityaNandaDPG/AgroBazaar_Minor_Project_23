@@ -37,14 +37,12 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
             const seller = await User.findById(sellerId);
 
             if (seller) {
-
                 const existingSeller = await User.findOne({ _id: sellerId, 'consumer_orders.payment_id': paymentId });
                 if (existingSeller) {
                     console.error('Duplicate payment ID for seller');
                     res.status(400).json({ error: 'Duplicate payment ID for seller' });
                     return;
                 }
-
 
                 const updatedSeller = await User.findByIdAndUpdate(
                     sellerId,
@@ -55,10 +53,10 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
                                 $each: req.body.filter(product => product.seller_id === sellerId)
                                     .map(product => ({
                                         cart: product,
-                                        
+
                                     })),
-                                    payment_id: paymentId,
-                                        consumer_id: userId
+                                payment_id: paymentId,
+                                consumer_id: userId
 
                             }
                         }
@@ -67,7 +65,8 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
                 );
 
                 console.log('Seller updated successfully:', updatedSeller);
-            } else {
+            }
+            else {
                 console.error('Seller not found');
                 res.status(404).json({ error: 'Seller not found' });
                 return;
@@ -75,7 +74,8 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
         }
 
         res.status(200).json({ message: 'User and seller updated successfully', user: updatedUser });
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Error updating user and seller:', error);
         res.status(500).json({ error: 'Server error' });
     }
@@ -103,7 +103,8 @@ router.get('/consumer_orders/:userId', async (req, res) => {
 
         const consumerOrders = user.consumer_orders;
         res.json(consumerOrders);
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }

@@ -3,19 +3,16 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cart = express.Router();
 const User = require('../../models/User.js');
-
 cart.use(bodyParser.json());
 
 cart.get('/:id', async (req, res) => {
     const userId = req.params.id;
-
     try {
         const user = await User.findById(userId);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
-
         const cartProducts = user.cart;
         res.status(200).json(cartProducts);
     }
@@ -25,15 +22,11 @@ cart.get('/:id', async (req, res) => {
     }
 });
 
-
 cart.put('/:id', async (req, res) => {
-    const { productId,seller_id, p_name,p_image, price } = req.body;
-
+    const { productId, seller_id, p_name, p_image, price } = req.body;
     const userId = req.params.id;
-
     try {
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -48,7 +41,7 @@ cart.put('/:id', async (req, res) => {
             return res.status(200).json({ status: "ok", message: 'Product is already exists in Cart' });
         }
 
-        user.cart.push({ _id: productId, seller_id: seller_id, name: p_name,image: p_image, quantity: 1, price: price });
+        user.cart.push({ _id: productId, seller_id: seller_id, name: p_name, image: p_image, quantity: 1, price: price });
         await user.save();
         console.log("Product is added to cart successfully.");
         res.status(200).json({ status: "ok", message: 'Product is added to cart successfully' });
@@ -64,7 +57,6 @@ cart.put('/:id/update/:productId/:newQuantity', async (req, res) => {
         const id = req.params.id;
         const productId = req.params.productId;
         const newQuantity = req.params.newQuantity;
-
         const user = await User.findById(id);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });

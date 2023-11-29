@@ -4,7 +4,6 @@ const User = require("../../models/User.js");
 
 router.get('/:userId', async (req, res) => {
     try {
-
         const userId = req.params.userId;
         const user = await User.findById(userId);
 
@@ -21,4 +20,4 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
-module.exports=router;
+module.exports = router;

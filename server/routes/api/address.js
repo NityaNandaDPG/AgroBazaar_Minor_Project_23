@@ -21,9 +21,10 @@ app.get('/full/:userId', async (req, res) => {
         ].filter(Boolean).join(', ');
 
         res.json({ userId, address });
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-module.exports=app;
+module.exports = app;
