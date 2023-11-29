@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 
 const DeliveryClaimPage = ({ claimType }) => {
     const id = useSelector((state) => state.user._id);
@@ -63,8 +63,7 @@ const DeliveryClaimPage = ({ claimType }) => {
             <label htmlFor="address" className="block text-sm font-medium text-gray-600 mb-2">
                 Enter Your Address:
             </label>
-            <input
-                type="text"
+            <textarea
                 id="address"
                 value={fullAddress}
                 onChange={(e) => setFullAddress(e.target.value)}
@@ -79,24 +78,21 @@ const DeliveryClaimPage = ({ claimType }) => {
 
             {distance !== null && (
                 <>
-                    <p className="mt-4 text-lg">Distance from Kalyani: {distance} kilometers</p>
+                    <p className="mt-4 text-lg">Distance from Seller Address: {distance} kilometers</p>
                     {totalAmountPayable !== null && (<>
                         <p className="mt-4 text-lg">Total Amount Payable: ₹{totalAmountPayable.toFixed(2)}</p>
                         <form action="http://localhost:8082/payment/pay" method="post">
-                            <input type="submit" value="Oder Now" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded" />
+                            <input type="submit" value="PayPal" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded" />
                         </form>
                     </>
                     )}
-                    {claimType === "paid" && totalAmountPayable !== null && (<>
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">
-                            Pay Here
-                        </button>
+                    {/* {claimType === "paid" && totalAmountPayable !== null && (<>
 
                         <form action="http://localhost:8082/payment/pay" method="post">
-                            <input type="submit" value="Oder Now" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded" />
+                            <input type="submit" value="PayPal" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded" />
                         </form>
                     </>
-                    )}
+                    )} */}
                 </>
             )}
 

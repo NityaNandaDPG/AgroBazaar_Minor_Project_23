@@ -206,14 +206,14 @@ const Basket2 = () => {
             <div className="mt-4">
                 <strong>Total with GST: ₹{totalWithGST}</strong>
             </div>
-            {/* {eligibleForFreeDelivery ? (
+            {eligibleForFreeDelivery ? (
                 <div className="mt-4">
                     <p>You are eligible for free home delivery!</p>
                     <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleClaimFreeDelivery}>
                         Claim Free Delivery
                     </button>
                 </div>
-            ) : ( */}
+            ) : (
                 <div className="mt-4">
                     <p>
                         Click here for home delivery at ₹50P per KM.{" "}
@@ -222,7 +222,7 @@ const Basket2 = () => {
                         </button>
                     </p>
                 </div>
-            {/* )} */}
+            )}
             <Toaster />
         </div>
     );

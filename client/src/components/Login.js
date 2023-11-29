@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, redirect, useHistory } from "react-router-dom";
 import { loginRedux, logoutRedux } from "../redux/userSlice";
 import vegmart from './resources/vegmart.png';
-
+import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -12,10 +12,6 @@ const Login = () => {
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  // if(user.isAuthenticated){
-  //   alert("You are already logged in");
-  //   navigate("/");
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +33,11 @@ const Login = () => {
     if (res.status === "ok") {
       dispatch(loginRedux(res));
       console.log(user);
-      alert("Login Successful");
+      //alert("Login Successful");
+      toast.success("Login Successful")
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
       navigate("/");
     }
     else if (res.status === "error") {
@@ -87,6 +87,7 @@ const Login = () => {
                 placeholder="Ener your Email address"
               />
             </div>
+            
           </div>
 
           <div>
@@ -113,6 +114,7 @@ const Login = () => {
                 placeholder="Ener your Password"
               />
             </div>
+            
           </div>
 
           <div>
@@ -123,6 +125,7 @@ const Login = () => {
             >
               Sign in
             </button>
+            <Toaster/>
           </div>
         </form>
 

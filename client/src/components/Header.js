@@ -49,7 +49,6 @@ function Header(){
                 </div>
                 )}
             </div>
-            {/* <a href='#'><BiChat/></a> */}
         </header>
     );
 }

@@ -50,7 +50,6 @@ router.put("/new/:id", async (req, res) => {
   }
 });
 
-
 router.get("/all", async (req, res) => {
   try {
     let usersQuery = {};
@@ -65,6 +64,36 @@ router.get("/all", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// router.get("/all/:name/:category/:maxPrice", async (req, res) => {
+//   try {
+//     const { name, category, maxPrice } = req.params;
+//     console.log("Search Value:",name,category,maxPrice)
+
+//     let usersQuery = {};
+//     const users = await User.find(usersQuery, "products");
+//     const allProducts = users.reduce(
+//       (acc, user) => acc.concat(user.products),
+//       []
+//     );
+
+//     if (name != undefined && name !== '') {
+//       filteredProducts = allProducts.filter(product => product.name.includes(name));
+//     }
+
+//     if (category !== undefined && category !== '') {
+//       filteredProducts = allProducts.filter(product => product.category === category);
+//     }
+
+//     if (maxPrice !== undefined && maxPrice !== '') {
+//       filteredProducts = allProducts.filter(product => product.price <= parseFloat(maxPrice));
+//     }
+
+//     res.json(filteredProducts);
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 
 router.get("/all/:productId", async (req, res) => {
@@ -136,36 +165,5 @@ router.delete('/:userId/:productId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
-
-
-// router.get('/all', async (req, res) => {
-//   try {
-//     const { name, category, maxPrice } = req.query;
-//     console.log(name)
-//     console.log(category)
-//     console.log(maxPrice)
-//     let filter = {};
-
-//     if (name) {
-//       filter.name = name;
-//     }
-//     if (category) {
-//       filter.category = category;
-//     }
-//     if (maxPrice) {
-//       filter.price = { $lte: parseFloat(maxPrice) };
-//     }
-//     filter._id = { $ne: null }; 
-
-//     const users = await User.find(filter, 'products');
-//     const allProducts = users.reduce((acc, user) => acc.concat(user.products), []);
-//     res.json(allProducts);
-//   }
-//   catch (error) {
-//     console.error('Error filtering products:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
 
 module.exports = router;

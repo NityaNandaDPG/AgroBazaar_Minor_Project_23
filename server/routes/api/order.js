@@ -6,6 +6,9 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
     const userId = req.params.userId;
     const paymentId = req.params.paymentId;
 
+    console.log("Consumer Id:", userId)
+    console.log("Payment Id:", paymentId)
+
     try {
         const existingUser = await User.findOne({ _id: userId, 'orders.payment_id': paymentId });
         if (existingUser) {
@@ -50,11 +53,13 @@ router.put("/new/:userId/:paymentId", async (req, res) => {
                             'consumer_orders': {
                                 // cart: req.body,
                                 $each: req.body.filter(product => product.seller_id === sellerId)
-                                .map(product => ({
-                                    cart: product,
-                                })),
-                                payment_id: paymentId,
-                                consumer_id: userId // Optionally, you may want to store the buyer's ID for reference
+                                    .map(product => ({
+                                        cart: product,
+                                        
+                                    })),
+                                    payment_id: paymentId,
+                                        consumer_id: userId
+
                             }
                         }
                     },
