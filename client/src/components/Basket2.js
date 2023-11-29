@@ -78,18 +78,18 @@ const Basket2 = () => {
     };
 
     const updateQuantity = async (productId, newQuantity) => {
-        try {
-            const response = await axios.put(
-                `http://localhost:8082/add2cart/${id}/update/${productId}/${newQuantity}`
-            );
-            const updatedCart = response.data;
-            setCart(updatedCart);
-            console.log("Quantity Updated successfully!");
-            toast.success("Quantity Updated successfully!")
-        } catch (error) {
-            console.error("Failed to update quantity:", error.message);
-            toast.error("Quantity Updated Failed!")
-        }
+        axios.put(`http://localhost:8082/add2cart/${id}/update/${productId}/${newQuantity}`)
+            .then(response => {
+                const updatedCart = response.data;
+                setCart(updatedCart);
+                console.log("Quantity Updated successfully!");
+                toast.success("Quantity Updated successfully!");
+            })
+            .catch(error => {
+                console.error("Failed to update quantity:", error.message);
+                alert(error.message);
+                //   toast.error(error.message);
+            });
     };
 
     // Render individual product details
@@ -223,7 +223,7 @@ const Basket2 = () => {
                     </p>
                 </div>
             )}
-            <Toaster />
+            {/* <Toaster /> */}
         </div>
     );
 };

@@ -21,6 +21,7 @@ const ProductCard = ({ product, addToCart }) => {
         </div>
         <div className="flex items-center justify-between mt-4">
           <div className="text-2xl font-bold text-black">₹{product.price}</div>
+          
 
           <button
             onClick={handleAddToCart}

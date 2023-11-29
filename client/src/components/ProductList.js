@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 function ProductList() {
   const user = useSelector((state) => state.user);
   const id = user._id;
-  const isAuthenticated = user.isAuthenticated; 
+  const isAuthenticated = user.isAuthenticated;
   const [vegs, setVegs] = useState([]);
   const [filteredVegs, setFilteredVegs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,12 +39,12 @@ function ProductList() {
         price,
       });
       console.log(response.data.message);
-      toast.success('Item added to cart successfully!');
-      // alert(response.data.message);
+      // toast.success('Item added to cart successfully!');
+      alert(response.data.message);
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      // alert("Failed to add to Cart");
-      toast.error('Error adding item to cart');
+      // console.error('Error adding to cart:', error);
+      alert("Failed to add to Cart");
+      // toast.error('Error adding item to cart');
     }
   };
 
@@ -68,7 +68,7 @@ function ProductList() {
   };
 
   const handleFilterSubmit = (e) => {
-    
+
     // Filter the products based on searchTerm, categoryFilter, and priceFilter
     const filteredProducts = vegs.filter((product) => {
       const matchesSearchTerm = !searchTerm || product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -116,7 +116,7 @@ function ProductList() {
             value={priceFilter}
             onChange={handlePriceChange}
             className="w-full h-10 border rounded mr-4"
-            // className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          // className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
           <button type="submit" className="w-full h-10 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded">
             Search

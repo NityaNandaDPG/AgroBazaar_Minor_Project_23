@@ -68,6 +68,7 @@ const SellingHub = () => {
                     <th className="px-4 py-2">Name</th>
                     <th className="px-4 py-2">Description</th>
                     <th className="px-4 py-2">Price</th>
+                    <th className="px-4 py-2">Quantity</th>
                     <th className="px-4 py-2">Actions</th>
                 </tr>
             </thead>
@@ -91,6 +92,7 @@ const SellingHub = () => {
                             <td className="px-4 py-2">{item.name}</td>
                             <td className="px-4 py-2">{item.description}</td>
                             <td className="px-4 py-2">{item.price}</td>
+                            <td className="px-4 py-2">{item.quantity}</td>
                             <td className="px-4 py-2">
                                 <Link className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700 mr-2"
                                     to={`/updateproduct/${item._id}`}>

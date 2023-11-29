@@ -71,6 +71,20 @@ cart.put('/:id/update/:productId/:newQuantity', async (req, res) => {
         if (!cartItem) {
             return res.status(404).json({ error: 'Product not found in user\'s cart' });
         }
+        
+        const users = await User.find({}, "products");
+        const allProducts = users.reduce(
+          (acc, user) => acc.concat(user.products),
+          []
+        );
+
+        const productInUserProducts = allProducts.find(product => product._id.toString() === productId);
+        console.log("Hehe: ",productInUserProducts)
+        if (productInUserProducts && newQuantity > productInUserProducts.quantity) {
+            return res.status(400).json({ error: 'New quantity exceeds available quantity in user\'s products' });
+        }
+
+
         cartItem.quantity = newQuantity > 0 ? newQuantity : 1;
         await user.save();
         const updatedCart = user.cart;

@@ -15,6 +15,7 @@ const NewProduct1 = () => {
         image: "",
         price: "",
         description: "",
+        quantity:""
     });
 
     const handleChange = (event, property) => {
@@ -29,6 +30,7 @@ const NewProduct1 = () => {
             image: "",
             price: "",
             description: "",
+            quantity:""
         });
     };
 
@@ -165,6 +167,25 @@ const NewProduct1 = () => {
                                 id="price"
                                 autoComplete="off"
                                 onChange={(e) => handleChange(e, "price")}
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                        <label
+                            htmlFor="price"
+                            className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                            Quantity
+                        </label>
+                        <div className="mt-2">
+                            <input
+                                type="number"
+                                name="quantity"
+                                id="quantity"
+                                autoComplete="off"
+                                onChange={(e) => handleChange(e, "quantity")}
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
