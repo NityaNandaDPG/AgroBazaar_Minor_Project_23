@@ -180,14 +180,14 @@ const Basket2 = () => {
 
     const handleClaimFreeDelivery = () => {
         if (totalWithGST) {
-            const encodedTotalWithGST = encodeURIComponent(totalWithGST);
+            const encodedTotalWithGST = encodeURIComponent(totalPrice);
             navigate(`/DeliveryClaimPage/free/${encodedTotalWithGST}`);
         }
     };
 
     const handleClaimDelivery = () => {
         if (totalWithGST) {
-            const encodedTotalWithGST = encodeURIComponent(totalWithGST);
+            const encodedTotalWithGST = encodeURIComponent(totalPrice);
             navigate(`/DeliveryClaimPage/paid/${encodedTotalWithGST}`);
         }
     };
@@ -200,12 +200,7 @@ const Basket2 = () => {
             <div className="mt-4">
                 <strong>Total Price: ₹{totalPrice.toFixed(2)}</strong>
             </div>
-            <div className="mt-4">
-                <span>12% GST: ₹{gst}</span>
-            </div>
-            <div className="mt-4">
-                <strong>Total with GST: ₹{totalWithGST}</strong>
-            </div>
+
             {eligibleForFreeDelivery ? (
                 <div className="mt-4">
                     <p>You are eligible for free home delivery!</p>
