@@ -8,9 +8,9 @@ function Home() {
 
   return (
     
-    <div>
+    <div >
       <Header/>
-      <main>
+      <main >
         {/* <MarketPrice/> */}
         
         <Outlet/>
